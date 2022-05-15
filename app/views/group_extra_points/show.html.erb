@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @group_extra_point.amount %>
+</p>
+
+<p>
+  <strong>Date done:</strong>
+  <%= @group_extra_point.date_done %>
+</p>
+
+<p>
+  <strong>Group:</strong>
+  <%= @group_extra_point.group_id %>
+</p>
+
+<p>
+  <strong>Extra point:</strong>
+  <%= @group_extra_point.extra_point_id %>
+</p>
+
+<%= link_to 'Edit', edit_group_extra_point_path(@group_extra_point) %> |
+<%= link_to 'Back', group_extra_points_path %>

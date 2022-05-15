@@ -1,0 +1,37 @@
+<%= form_with(model: group_extra_point) do |form| %>
+  <% if group_extra_point.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(group_extra_point.errors.count, "error") %> prohibited this group_extra_point from being saved:</h2>
+
+      <ul>
+        <% group_extra_point.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.text_field :amount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_done %>
+    <%= form.datetime_select :date_done %>
+  </div>
+
+  <div class="field">
+    <%= form.label :group_id %>
+    <%= form.text_field :group_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_point_id %>
+    <%= form.text_field :extra_point_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

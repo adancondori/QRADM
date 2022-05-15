@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @extra_point.amount %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @extra_point.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @extra_point.description %>
+</p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @extra_point.event_id %>
+</p>
+
+<%= link_to 'Edit', edit_extra_point_path(@extra_point) %> |
+<%= link_to 'Back', extra_points_path %>

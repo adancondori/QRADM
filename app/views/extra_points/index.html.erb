@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Extra Points</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Amount</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Event</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @extra_points.each do |extra_point| %>
+      <tr>
+        <td><%= extra_point.amount %></td>
+        <td><%= extra_point.name %></td>
+        <td><%= extra_point.description %></td>
+        <td><%= extra_point.event_id %></td>
+        <td><%= link_to 'Show', extra_point %></td>
+        <td><%= link_to 'Edit', edit_extra_point_path(extra_point) %></td>
+        <td><%= link_to 'Destroy', extra_point, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Extra Point', new_extra_point_path %>

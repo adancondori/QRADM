@@ -1,0 +1,47 @@
+<%= form_with(model: group_activity) do |form| %>
+  <% if group_activity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(group_activity.errors.count, "error") %> prohibited this group_activity from being saved:</h2>
+
+      <ul>
+        <% group_activity.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.text_field :amount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_done %>
+    <%= form.datetime_select :date_done %>
+  </div>
+
+  <div class="field">
+    <%= form.label :group_id %>
+    <%= form.text_field :group_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :activity_id %>
+    <%= form.text_field :activity_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :observation %>
+    <%= form.text_field :observation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyString
+  rules: MyString
+  code: MyString
+  date_init: 2022-05-15 01:15:22
+  date_end: 2022-05-15 01:15:22
+  amount: 9.99
+  is_close: false
+  state: false
+  is_visible: false
+  event: one
+
+two:
+  name: MyString
+  description: MyString
+  rules: MyString
+  code: MyString
+  date_init: 2022-05-15 01:15:22
+  date_end: 2022-05-15 01:15:22
+  amount: 9.99
+  is_close: false
+  state: false
+  is_visible: false
+  event: two

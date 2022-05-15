@@ -1,0 +1,72 @@
+<%= form_with(model: activity) do |form| %>
+  <% if activity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
+
+      <ul>
+        <% activity.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rules %>
+    <%= form.text_field :rules %>
+  </div>
+
+  <div class="field">
+    <%= form.label :code %>
+    <%= form.text_field :code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_init %>
+    <%= form.datetime_select :date_init %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_end %>
+    <%= form.datetime_select :date_end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.text_field :amount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_close %>
+    <%= form.check_box :is_close %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.check_box :state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_visible %>
+    <%= form.check_box :is_visible %>
+  </div>
+
+  <div class="field">
+    <%= form.label :event_id %>
+    <%= form.text_field :event_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,2 @@
+module ExtraPointsHelper
+end

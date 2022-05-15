@@ -1,0 +1,42 @@
+<%= form_with(model: parameter) do |form| %>
+  <% if parameter.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(parameter.errors.count, "error") %> prohibited this parameter from being saved:</h2>
+
+      <ul>
+        <% parameter.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.text_field :amount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type %>
+    <%= form.text_field :type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.check_box :state %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

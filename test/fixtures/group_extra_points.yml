@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amount: 9.99
+  date_done: 2022-05-15 01:41:46
+  group: one
+  extra_point: one
+
+two:
+  amount: 9.99
+  date_done: 2022-05-15 01:41:46
+  group: two
+  extra_point: two

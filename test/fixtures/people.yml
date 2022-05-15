@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  last_name: MyString
+  phone: MyString
+  code: MyString
+  state: false
+  group: one
+  event: 
+
+two:
+  name: MyString
+  last_name: MyString
+  phone: MyString
+  code: MyString
+  state: false
+  group: two
+  event: 
