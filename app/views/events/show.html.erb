@@ -1,39 +1,64 @@
-<p id="notice"><%= notice %></p>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Dashboard</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Postres</li>
+      </ol>
+    </nav>
+</div>
+<div class="card-block">
+  <section class="example">
+    <section class="text-center">
+        <div class="container">
+            <h3 class="jumbotron-heading"><%= @event.name %></h3>
+        </div>
+    </section>
 
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
+    <div class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" align="left">
+                  <p>
+                  <strong>Name:</strong>
+                  <%= @event.name %>
+                  </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
+                  <p>
+                  <strong>Description:</strong>
+                  <%= @event.description %>
+                  </p>
 
-<p>
-  <strong>Code:</strong>
-  <%= @event.code %>
-</p>
+                  <p>
+                  <strong>Code:</strong>
+                  <%= @event.code %>
+                  </p>
 
-<p>
-  <strong>Amount:</strong>
-  <%= @event.amount %>
-</p>
+                  <p>
+                  <strong>Amount:</strong>
+                  <%= @event.amount %>
+                  </p>
 
-<p>
-  <strong>Type validation:</strong>
-  <%= @event.type_validation %>
-</p>
+                  <p>
+                  <strong>Type validation:</strong>
+                  <%= @event.type_validation %>
+                  </p>
 
-<p>
-  <strong>Init date:</strong>
-  <%= @event.init_date %>
-</p>
+                  <p>
+                  <strong>Init date:</strong>
+                  <%= @event.init_date %>
+                  </p>
 
-<p>
-  <strong>End date:</strong>
-  <%= @event.end_date %>
-</p>
+                  <p>
+                  <strong>End date:</strong>
+                  <%= @event.end_date %>
+                  </p>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+                  <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-dark" %> |
+                  <%= link_to 'Back', events_path, class: "btn btn-primary" %>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
