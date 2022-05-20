@@ -18,5 +18,13 @@ module App
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: [:get, :post, :put, :delete, :options]
+      end
+    end
   end
 end
