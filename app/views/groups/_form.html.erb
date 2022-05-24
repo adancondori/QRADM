@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_field :description %>
+    <%= form.text_area :description %>
   </div>
 
   <div class="field">
@@ -33,7 +33,8 @@
 
   <div class="field">
     <%= form.label :event_id %>
-    <%= form.text_field :event_id %>
+    <%= form.select :event_id, options_from_collection_for_select(Event.all, 'id', 'name', '1') %>
+
   </div>
 
   <div class="actions">
