@@ -1,0 +1,26 @@
+
+<table>
+  <thead>
+  <tr>
+    <th>Amount</th>
+    <th>Date done</th>
+    <th>Group</th>
+    <th>Extra point</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% group_extra_points.each do |group_extra_point| %>
+    <tr>
+      <td><%= group_extra_point.amount %></td>
+      <td><%= group_extra_point.date_done %></td>
+      <td><%= group_extra_point.group_id %></td>
+      <td><%= group_extra_point.extra_point_id %></td>
+      <td><%= link_to 'Show', group_extra_point %></td>
+      <td><%= link_to 'Edit', edit_group_extra_point_path(group_extra_point) %></td>
+      <td><%= link_to 'Destroy', group_extra_point, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

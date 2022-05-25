@@ -25,5 +25,11 @@
   <%= @group.event_id %>
 </p>
 
+<h3>Puntos</h3>
+<%= render partial: 'table_points', locals: {group: @group } %>
+<p>
+  <strong>test:</strong>
+
+</p>
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %>

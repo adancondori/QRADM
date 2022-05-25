@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[ show edit update destroy ]
+  before_action :set_event, only: %i[ show edit update destroy event_groups]
 
   # GET /events or /events.json
   def index
@@ -32,6 +32,10 @@ class EventsController < ApplicationController
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def event_groups
+    @event
   end
 
   # PATCH/PUT /events/1 or /events/1.json

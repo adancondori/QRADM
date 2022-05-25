@@ -11,7 +11,12 @@ Rails.application.routes.draw do
   resources :activities
   resources :people
   resources :groups
-  resources :events
+  resources :events do
+    member do
+      get 'event_groups'
+    end
+  end
+
   get 'welcome/index'
 
   # section Api

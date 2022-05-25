@@ -1,0 +1,59 @@
+
+<table>
+  <thead>
+  <tr>
+    <th>Tipo</th>
+    <th>Detalle</th>
+    <th>Puntos</th>
+    <th>Fecha Realizado</th>
+    <th>User</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% group.group_activities.each do |group_activity| %>
+    <tr>
+      <td><%= "Actividades" %></td>
+      <td><%= group_activity.activity.name %></td>
+      <td><%= group_activity.amount %></td>
+      <td><%= group_activity.date_done.strftime("%-d/%-m/%y: %H:%M") %></td>
+      <td><%= group_activity.user.name %></td>
+      <td><%= link_to 'Show', group_activity %></td>
+      <td><%= link_to 'Edit', edit_group_activity_path(group_activity) %></td>
+      <td><%= link_to 'Destroy', group_activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  <% group.group_sanctions.each do |group_sanction| %>
+    <tr>
+      <td><%= "Sanciones" %></td>
+      <td><%= group_sanction.sanction.name %></td>
+      <td><%= group_sanction.amount %></td>
+      <td><%= group_sanction.date_done.strftime("%-d/%-m/%y: %H:%M") %></td>
+      <td><%= group_sanction.user.name %></td>
+      <td><%= link_to 'Show', group_sanction %></td>
+      <td><%= link_to 'Edit', edit_group_sanction_path(group_sanction) %></td>
+      <td><%= link_to 'Destroy', group_sanction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  <% group.group_extra_points.each do |group_extra_point| %>
+    <tr>
+      <td><%= "Puntos Extras" %></td>
+      <td><%= group_extra_point.extra_point.name %></td>
+      <td><%= group_extra_point.amount %></td>
+      <td><%= group_extra_point.date_done.strftime("%-d/%-m/%y: %H:%M") %></td>
+      <td><%= "group_extra_point.user_id" %></td>
+      <td><%= link_to 'Show', group_extra_point %></td>
+      <td><%= link_to 'Edit', edit_group_extra_point_path(group_extra_point) %></td>
+      <td><%= link_to 'Destroy', group_extra_point, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+  <tfoot>
+  <tr>
+    <td>---</td>
+    <td>TOTAL:</td>
+    <td><%= group.sum_group_activities - group.sum_group_sanctions + group.sum_group_extra_points %></td>
+  </tr>
+  </tfoot>
+</table>

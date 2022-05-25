@@ -1,0 +1,45 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Dashboard</h1>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Eventos</li>
+    </ol>
+  </nav>
+</div>
+<div class="card-block">
+  <section class="example mt-4">
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+          <tr>
+            <th>Nombre de Grupo</th>
+            <th>Puntos Actividades</th>
+            <th>Puntos Sanciones</th>
+            <th>Puntos Extras</th>
+            <th>Total</th>
+            <th> Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @event.groups.each do |group| %>
+            <tr>
+              <td class="v-align-middle"><%= group.name %></td>
+              <td class="v-align-middle"><%= group.sum_group_activities %></td>
+              <td class="v-align-middle"><%= group.sum_group_sanctions * -1%></td>
+              <td class="v-align-middle"><%= group.sum_group_extra_points %></td>
+              <td class="v-align-middle"><%= group.sum_total %></td>
+              <td class="v-align-middle">
+                <%= link_to 'Show', group, class: "btn btn-success" %>
+                <%= link_to 'Edit', edit_group_path(group), class: "btn btn-primary" %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+

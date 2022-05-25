@@ -23,12 +23,12 @@
 
   <div class="field">
     <%= form.label :group_id %>
-    <%= form.text_field :group_id %>
+    <%= form.select :group_id, options_from_collection_for_select(Group.all, 'id', 'name', '1') %>
   </div>
 
   <div class="field">
     <%= form.label :sanction_id %>
-    <%= form.text_field :sanction_id %>
+    <%= form.select :sanction_id, options_from_collection_for_select(Sanction.all, 'id', 'name', '1') %>
   </div>
 
   <div class="field">
