@@ -1,0 +1,103 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Description: stack for Postgres DBDATA, Buckets, Permissions
+
+Parameters:
+  ParameterAvailabilityZoneRDS:
+    AllowedValues:
+      - us-east-1a
+      - us-east-1c
+    ConstraintDescription: Enter the availability zone for RDS. Changing
+      this value will rebuild the instance
+    Default: us-east-1a
+    Description: the availability zone where rds will launch
+    Type: String
+  ParamDBDataInstanceClass:
+    Description: "instance type for DB"
+    Type: String
+    Default: db.t3.micro
+    AllowedValues:
+      - db.t3.medium
+      - db.t3.micro
+  Stack:
+    Description: "Select an Stack this an important step"
+    Type: String
+    AllowedValues:
+      - s103 # Pre production environment
+      - s102 # Dev environment
+      - s100 # Production environment
+  ProjectName:
+    Type: String
+    Default: qradm
+
+Resources:
+  DBInstanceData:
+    Properties:
+      AvailabilityZone: !Ref ParameterAvailabilityZoneRDS
+      AllocatedStorage: '5'
+      BackupRetentionPeriod: '3'
+      DBInstanceClass: !Ref ParamDBDataInstanceClass
+      DBInstanceIdentifier:
+        Fn::Join:
+          - ''
+          - - dbdata-
+            - Ref: Stack
+      DBName: !Ref ProjectName
+      Engine: postgres
+      MasterUserPassword: root12345678909
+      MasterUsername: root
+      StorageType: gp2
+      Tags:
+        - Key: Name
+          Value:
+            Fn::Join:
+              - ''
+              - - 'qradm-'
+                - Ref: Stack
+      VPCSecurityGroups:
+        - Fn::GetAtt:
+            - EC2SecurityGroupForRDS
+            - GroupId
+    Type: AWS::RDS::DBInstance
+  EC2SecurityGroupForRDS:
+    Properties:
+      GroupDescription: Export Default Port Postgres DB
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          FromPort: '5432'
+          IpProtocol: tcp
+          ToPort: '5432'
+
+    Type: AWS::EC2::SecurityGroup
+#  AppAssets:
+#    Type: AWS::S3::Bucket
+#    Properties:
+#      AccessControl: Private
+#      BucketName:
+#        !Sub
+#        - ${ProjectName}-app-assets-${Stack}
+#        - Stack: !Ref Stack
+#          ProjectName: !Ref ProjectName
+#  BucketPolicyForAssets:
+#    Type: AWS::S3::BucketPolicy
+#    Properties:
+#      Bucket: !Ref AppAssets
+#      PolicyDocument:
+#        Version: 2012-10-17
+#        Statement:
+#          - Action: s3:ListBucket
+#            Effect: Allow
+#            Principal:
+#              AWS: '*'
+#            Resource: !Sub
+#              - 'arn:aws:s3:::${AppAssets}'
+#              - { AppAssets: !Ref AppAssets }
+#          - Action: s3:*
+#            Sid: AllowAllS3ActionsInsideBucket
+#            Effect: Allow
+#            Principal:
+#              AWS: '*'
+#            Resource: !Join
+#              - ''
+#              - - !GetAtt AppAssets.Arn
+#                - /*

@@ -1,0 +1,8 @@
+es:
+  group:
+    name: Nombre
+    description: Descripción
+    code: Código
+    logo: Imagen
+    state: Estado
+    event_id: Evento

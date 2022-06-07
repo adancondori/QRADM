@@ -1,35 +1,56 @@
-<p id="notice"><%= notice %></p>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Dashboard</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Postres</li>
+      </ol>
+    </nav>
+</div>
+<div class="card-block">
+    <section class="text-center">
+        <div class="container">
+            <h3 class="jumbotron-heading"><%= @group.name %></h3>
+        </div>
+    </section>
 
-<p>
-  <strong>Name:</strong>
-  <%= @group.name %>
-</p>
+    <div class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" align="left">
+                  <p>
+                    <strong><%= t('group.name')%></strong>
+                    <%= @group.name %>
+                  </p>
+                  <p>
+                    <strong><%= t('group.description')%></strong>
+                    <%= @group.description %>
+                  </p>
+                  <p>
+                    <strong><%= t('group.code')%></strong>
+                    <%= @group.code %>
+                  </p>
+                  <p>
+                    <strong><%= t('group.state')%></strong>
+                    <%= @group.state %>
+                  </p>
+                  <p>
+                    <strong><%= t('group.event_id')%></strong>
+                    <%= @group.event.name %>
+                  </p>
+                  <h3>Puntos</h3>
+                  <%= render partial: 'table_points', locals: {group: @group } %>
+                  <p>
+                    <strong></strong> 
+                  </p>
+                  <%= link_to t("button_action.edit"), edit_group_path(@group), class: "btn btn-dark" %> |
+                  <%= link_to t("button_action.back"), groups_path, class: "btn btn-primary" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @group.description %>
-</p>
 
-<p>
-  <strong>Code:</strong>
-  <%= @group.code %>
-</p>
 
-<p>
-  <strong>State:</strong>
-  <%= @group.state %>
-</p>
 
-<p>
-  <strong>Event:</strong>
-  <%= @group.event_id %>
-</p>
-
-<h3>Puntos</h3>
-<%= render partial: 'table_points', locals: {group: @group } %>
-<p>
-  <strong>test:</strong>
-
-</p>
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>

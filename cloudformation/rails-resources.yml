@@ -1,0 +1,411 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: stack for deploy all rails resources
+Parameters:
+  HostedZoneId:
+    Default: Z071914631SR0TRBGOIUR
+    Type: String
+  DomainName:
+    Default: eventsadm.space
+    Type: String
+  CompleteSoluctionStackEB:
+    Default: 64bit Amazon Linux 2 v3.4.4 running Ruby 2.7
+    Description: 'Please go to https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html#platforms-supported.ruby'
+    Type: String
+  BranchToDeploy:
+    ConstraintDescription: 'Enter the name of an existent branch. Example: develop,
+      master, etc. '
+    Description: name of the branch to deploy
+    Type: String
+  ParamInstanceType:
+    AllowedValues:
+      - t2.micro
+      - t3.small
+      - t3.medium
+      - t3a.small
+      - t3a.medium
+    Default: t2.micro
+    Type: String
+    Description: Type of instances only choose t2 type
+  URLDBInstance:
+    Default: url_database
+    Description: The name of the DB Stack to associate
+    Type: String
+  Stack:
+    Description: "Select an Stack this an important step"
+    Type: String
+    AllowedValues:
+      - s103 # Pre production environment
+      - s102 # Dev environment
+      - s100 # Production environment
+  RailsEnv:
+    Description: "Select rails environment"
+    Type: String
+    AllowedValues:
+      - staging
+      - production
+      - test
+  ProjectName:
+    Type: String
+    Default: qradm
+  DefaultKeyPair:
+    Type: String
+    Default: keypairqradm
+
+
+Resources:
+  DNSWWW:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Comment: record for www
+      HostedZoneId: !Ref HostedZoneId
+      Name: !Sub 'www.${DomainName}'
+      ResourceRecords:
+        - Fn::GetAtt:
+            - RailsEnvironment
+            - EndpointURL
+      TTL: '60'
+      Type: CNAME
+  DNSSTACK:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Comment: record for stack
+      HostedZoneId: !Ref HostedZoneId
+      Name: !Sub '${ProjectName}-${Stack}.${DomainName}'
+      ResourceRecords:
+        - Fn::GetAtt:
+            - RailsEnvironment
+            - EndpointURL
+      TTL: '60'
+      Type: CNAME
+  CertificateManager:
+    Type: "AWS::CertificateManager::Certificate"
+    Properties:
+      DomainName: !Ref DomainName
+      SubjectAlternativeNames:
+        - !Sub '*.${DomainName}'
+      ValidationMethod: DNS
+  RoleVoid:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action:
+              - sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+        Version: '2012-10-17'
+      Path: /
+      Policies:
+        - PolicyDocument:
+            Statement:
+              - Sid: ElasticBeanstalkHealthAccess
+                Action:
+                  - elasticbeanstalk:PutInstanceStatistics
+                Effect: Allow
+                Resource:
+                  - arn:aws:elasticbeanstalk:*:*:application/*
+                  - arn:aws:elasticbeanstalk:*:*:environment/*
+#              - Action: s3:PutObject
+#                Effect: Allow
+#                Resource: arn:aws:s3:::elasticbeanstalk-*/resources/environments/logs/*
+#              - Action: s3:*
+#                Effect: Allow
+#                Resource: *
+#              - Action: s3:*
+#                Effect: Allow
+#                Resource: !Sub arn:aws:s3:::${ProjectName}-app-assets-${Stack}
+              - Action: cloudformation:DescribeStacks
+                Effect: Allow
+                Resource: '*'
+              - Action:
+                  - ec2:Describe*
+                  - ec2:describeVpcs
+                Effect: Allow
+                Resource: '*'
+              - Action: cloudwatch:*
+                Effect: Allow
+                Resource: '*'
+              - Action: swf:*
+                Effect: Allow
+                Resource: '*'
+#              - Action:
+#                  - s3:Get*
+#                  - s3:List *
+#                Effect: Allow
+#                Resource: '*'
+              - Action: cloudsearch:*
+                Effect: Allow
+                Resource: '*'
+              - Action:
+                  - inspector:ListAssessmentRuns
+                  - inspector:ListFindings
+                Effect: Allow
+                Resource: '*'
+            Version: '2012-10-17'
+          PolicyName:
+            Fn::Join:
+              - ''
+              - - VoidPolicy
+                - Ref: AWS::StackName
+    Type: AWS::IAM::Role
+  InstanceProfileVoid:
+    Properties:
+      Path: /
+      Roles:
+        - Ref: RoleVoid
+    Type: AWS::IAM::InstanceProfile
+  QRADMApplication:
+    Properties:
+      ApplicationName:
+        !Sub
+        - eb-apr-${Stack}
+        - Stack: !Ref Stack
+      Description: AWS Elastic Beanstalk qradm Application
+    Type: AWS::ElasticBeanstalk::Application
+  securityGroup22:
+    Properties:
+      GroupDescription: Enable tcp/22 access
+      GroupName: security-group-ssh-ebs
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          Description: Allow to all world to ingress by ssh
+          FromPort: '22'
+          IpProtocol: tcp
+          ToPort: '22'
+    Type: AWS::EC2::SecurityGroup
+  securityGroup6379:
+    Properties:
+      GroupDescription: Enable tcp/6379 access only for group name default
+      GroupName: security-group-redis-ebs
+      SecurityGroupIngress:
+        - SourceSecurityGroupName: !Ref securityGroup22
+          Description: Ingress rule only for machines with attached port 22
+          FromPort: '6379'
+          IpProtocol: tcp
+          ToPort: '6379'
+    Type: AWS::EC2::SecurityGroup
+  RedisCluster:
+    Type: AWS::ElastiCache::CacheCluster
+    Properties:
+      CacheNodeType: cache.t2.micro
+      ClusterName:
+        !Sub
+        - redisdb-${Stack}
+        - Stack: !Ref Stack
+      Engine: redis
+      NumCacheNodes: 1
+      Port: 6379
+      VpcSecurityGroupIds:
+        - !GetAtt
+          - securityGroup6379
+          - GroupId
+  RailsConfigurationTemplate:
+    Properties:
+      ApplicationName:
+        Ref: QRADMApplication
+      Description: AWS ElasticBeanstalk Configuration Template
+      OptionSettings:
+        - Namespace: aws:autoscaling:launchconfiguration
+          OptionName: RootVolumeType
+          Value: gp2
+        - Namespace: aws:autoscaling:launchconfiguration
+          OptionName: RootVolumeSize
+          Value: 20
+        - Namespace: aws:elb:listener:443
+          OptionName: ListenerProtocol
+          Value: HTTPS
+        - Namespace: aws:elb:listener:443
+          OptionName: InstancePort
+          Value: 80
+        - Namespace: aws:elb:listener:443
+          OptionName: InstanceProtocol
+          Value: HTTP
+        - Namespace: aws:elb:listener:443
+          OptionName: SSLCertificateId
+          Value: !Ref CertificateManager
+        - Namespace: aws:autoscaling:launchconfiguration
+          OptionName: SecurityGroups
+          Value: !Ref securityGroup22
+        - Namespace: aws:autoscaling:launchconfiguration
+          OptionName: EC2KeyName
+          Value: !Ref DefaultKeyPair
+        - Namespace: aws:elasticbeanstalk:command
+          OptionName: DeploymentPolicy
+          Value: Rolling
+        - Namespace: aws:elasticbeanstalk:command
+          OptionName: Timeout
+          Value: 600
+        - Namespace: aws:elasticbeanstalk:command
+          OptionName: BatchSizeType
+          Value: Percentage
+        - Namespace: aws:elasticbeanstalk:command
+          OptionName: BatchSize
+          Value: 25
+        - Namespace: aws:elasticbeanstalk:command
+          OptionName: IgnoreHealthCheck
+          Value: true
+        - Namespace: aws:elasticbeanstalk:command
+          OptionName: HealthCheckSuccessThreshold
+          Value: Ok
+        - Namespace: aws:autoscaling:updatepolicy:rollingupdate
+          OptionName: RollingUpdateEnabled
+          Value: false
+        - Namespace: aws:autoscaling:trigger
+          OptionName: BreachDuration
+          Value: 1
+        - Namespace: aws:autoscaling:trigger
+          OptionName: EvaluationPeriods
+          Value: 1
+        - Namespace: aws:elb:loadbalancer
+          OptionName: CrossZone
+          Value: true
+        - Namespace: aws:elb:healthcheck
+          OptionName: Target
+          Value: HTTP:80/check.json
+        - Namespace: aws:autoscaling:trigger
+          OptionName: LowerBreachScaleIncrement
+          Value: -1
+        - Namespace: aws:autoscaling:trigger
+          OptionName: LowerThreshold
+          Value: 20
+        - Namespace: aws:autoscaling:trigger
+          OptionName: MeasureName
+          Value: CPUUtilization
+        - Namespace: aws:autoscaling:trigger
+          OptionName: Period
+          Value: 1
+        - Namespace: aws:autoscaling:trigger
+          OptionName: Statistic
+          Value: Average
+        - Namespace: aws:autoscaling:trigger
+          OptionName: Unit
+          Value: Percent
+        - Namespace: aws:autoscaling:trigger
+          OptionName: UpperBreachScaleIncrement
+          Value: 1
+        - Namespace: aws:autoscaling:trigger
+          OptionName: UpperThreshold
+          Value: 50
+        - Namespace: aws:autoscaling:launchconfiguration
+          OptionName: IamInstanceProfile
+          Value:
+            Ref: InstanceProfileVoid
+        - Namespace: aws:autoscaling:launchconfiguration
+          OptionName: InstanceType
+          Value:
+            Fn::Sub: ${ParamInstanceType}
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: RAILS_SKIP_MIGRATIONS
+          Value: 'false'
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: REDIS_URL
+          Value:
+            Fn::GetAtt:
+              - RedisCluster
+              - RedisEndpoint.Address
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: REDIS_PORT
+          Value:
+            Fn::GetAtt:
+              - RedisCluster
+              - RedisEndpoint.Port
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: RAILS_SKIP_ASSET_COMPILATION
+          Value: 'false'
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: APP_NAME
+          Value: !Ref ProjectName
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: RDS_DB_NAME
+          Value: !Ref ProjectName
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: RDS_USERNAME
+          Value: root
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: RDS_PASSWORD
+          Value: root12345678909
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: RDS_HOSTNAME
+          Value: !Ref URLDBInstance
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: RDS_PORT
+          Value: '5432'
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: RAILS_MASTER_KEY
+          Value: 8f9a2f1e7097707c857ae5abe407df7f
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: AWS_ACCESS_KEY_ID
+          Value: AKIAS6KSKZRAEM4LRDPA
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: AWS_SECRET_ACCESS_KEY
+          Value: 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
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: AWS_DEFAULT_REGION
+          Value: !Ref AWS::Region
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: AWS_REGION
+          Value: !Ref AWS::Region
+#        - Namespace: aws:elasticbeanstalk:application:environment
+#          OptionName: AWS_BUCKET_NAME
+#          Value:
+#            !Sub
+#            - ${ProjectName}-app-assets-${Stack}
+#            - Stack: !Ref Stack
+#              ProjectName: !Ref ProjectName
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: RAILS_ENV
+          Value: !Ref RailsEnv
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: NODE_ENV
+          Value: !Ref RailsEnv
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: BUNDLE_WITHOUT
+          Value: 'test:development'
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: BUNDLER_DEPLOYMENT_MODE
+          Value: 'true'
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: STACK
+          Value: !Ref Stack
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: RAILS_LOG_TO_STDOUT
+          Value: 'true'
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: RAILS_SERVE_STATIC_FILES
+          Value: 'true'
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: HOST
+          Value: !Ref DomainName
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: HOST
+          Value: !Sub '${ProjectName}-${Stack}.${DomainName}'
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: HOST_PORT
+          Value: 443
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: CHURCH_TOKEN
+          Value: 78c9537f06a735904eb64d8f2d8b22d4
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: FIREBASE_SERVER_KEY
+          Value: AAAAhpWU1Vs:APA91bGEgmS3yvpz2U3la36i5ut6rulC2C7u6chLmXxJGE29McR9NdubeNzvnzLQOTavw7-AiuWvV1qU3QzO_0LB0b354vgJPCtGdwdA5Q7Wr-ZSg_o4SegZRcI9ICP15xlL62XZ4wfa
+        - Namespace: aws:autoscaling:asg
+          OptionName: MinSize
+          Value: '1'
+        - Namespace: aws:autoscaling:asg
+          OptionName: MaxSize
+          Value: '1'
+      SolutionStackName: !Ref CompleteSoluctionStackEB
+    Type: AWS::ElasticBeanstalk::ConfigurationTemplate
+  RailsEnvironment:
+    Properties:
+      ApplicationName:
+        Ref: QRADMApplication
+      Description: AWS ElasticBeanstalk Environment
+      EnvironmentName:
+        !Sub
+        - eb-envr-${Stack}
+        - Stack: !Ref Stack
+      TemplateName:
+        Ref: RailsConfigurationTemplate
+    Type: AWS::ElasticBeanstalk::Environment

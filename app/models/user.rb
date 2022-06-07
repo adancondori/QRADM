@@ -4,4 +4,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   belongs_to :event, optional: true
+  protokoll :code, :pattern => "USER%y%m#####"
 end

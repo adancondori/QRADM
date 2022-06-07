@@ -1,35 +1,50 @@
-<p id="notice"><%= notice %></p>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Dashboard</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Postres</li>
+      </ol>
+    </nav>
+</div>
+<div class="card-block">
+    <div align="left">
+        <%= link_to t("button_action.add"), new_group_path, class: "btn btn-success mt-4 ml-3" %>
+    </div>
 
-<h1>Groups</h1>
+    <section class="example mt-4">
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                          <th><%= t('group.name')%></th>
+                          <th><%= t('group.description')%></th>
+                          <th><%= t('group.code')%></th>
+                          <th><%= t('group.state')%></th>
+                          <th><%= t('group.event_id')%></th>
+                          <th> Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @groups.each do |group| %>
+                          <tr>
+                            <td class="v-align-middle"><%= group.name %></td>
+                            <td class="v-align-middle"><%= group.description %></td>
+                            <td class="v-align-middle"><%= group.code %></td>
+                            <td class="v-align-middle"><%= group.state %></td>
+                            <td class="v-align-middle"><%= group.event.name %></td>
+                            <td class="v-align-middle">
+                              <%= link_to t("button_action.view"), group, class: "btn btn-dark" %>
+                              <%= link_to t("button_action.edit"), edit_group_path(group), class: "btn btn-primary" %>
+                              <%= link_to t("button_action.destroy"), group, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+                            </td>
+                          </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Code</th>
-      <th>State</th>
-      <th>Event</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @groups.each do |group| %>
-      <tr>
-        <td><%= group.name %></td>
-        <td><%= group.description %></td>
-        <td><%= group.code %></td>
-        <td><%= group.state %></td>
-        <td><%= group.event_id %></td>
-        <td><%= link_to 'Show', group %></td>
-        <td><%= link_to 'Edit', edit_group_path(group) %></td>
-        <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Group', new_group_path %>

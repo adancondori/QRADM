@@ -9,7 +9,7 @@
 </div>
 <div class="card-block">
     <div align="left">
-        <%= link_to 'Agregar', new_event_path, class: "btn btn-success mt-4 ml-3" %>
+        <%= link_to t("button_action.add"), new_event_path, class: "btn btn-success mt-4 ml-3" %>
     </div>
 
     <section class="example mt-4">
@@ -18,13 +18,13 @@
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Description</th>
-                          <th>Code</th>
-                          <th>Amount</th>
-                          <th>Type validation</th>
-                          <th>Init date</th>
-                          <th>End date</th>
+                          <th><%= t('event.name')%></th>
+                          <th><%= t('event.description')%></th>
+                          <th><%= t('event.code')%></th>
+                          <th><%= t('event.amount')%></th>
+                          <th><%= t('event.type_validation')%></th>
+                          <th><%= t('event.init_date')%></th>
+                          <th><%= t('event.end_date')%></th>
                           <th> Acciones</th>
                         </tr>
                     </thead>
@@ -39,10 +39,10 @@
                             <td class="v-align-middle"><%= event.init_date %></td>
                             <td class="v-align-middle"><%= event.end_date %></td>
                             <td class="v-align-middle">
-                              <%= link_to 'Show', event_groups_event_path(event), class: "btn btn-dark" %>
-                              <%= link_to 'Show', event, class: "btn btn-dark" %>
-                              <%= link_to 'Edit', edit_event_path(event), class: "btn btn-primary" %>
-                              <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+                              <%= link_to t("button_helper.view_group"), event_groups_event_path(event), class: "btn btn-dark" %>
+                              <%= link_to t("button_action.view"), event, class: "btn btn-dark" %>
+                              <%= link_to t("button_action.edit"), edit_event_path(event), class: "btn btn-primary" %>
+                              <%= link_to t("button_action.destroy"), event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
                             </td>
                           </tr>
                         <% end %>

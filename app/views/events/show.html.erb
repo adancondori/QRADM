@@ -19,42 +19,42 @@
             <div class="row">
                 <div class="col-md-12" align="left">
                   <p>
-                  <strong>Name:</strong>
+                  <strong><%= t('event.name')%></strong>
                   <%= @event.name %>
                   </p>
 
                   <p>
-                  <strong>Description:</strong>
+                  <strong><%= t('event.description')%></strong>
                   <%= @event.description %>
                   </p>
 
                   <p>
-                  <strong>Code:</strong>
+                  <strong><%= t('event.code')%></strong>
                   <%= @event.code %>
                   </p>
 
                   <p>
-                  <strong>Amount:</strong>
+                  <strong><%= t('event.amount')%></strong>
                   <%= @event.amount %>
                   </p>
 
                   <p>
-                  <strong>Type validation:</strong>
+                  <strong><%= t('event.type_validation')%></strong>
                   <%= @event.type_validation %>
                   </p>
 
                   <p>
-                  <strong>Init date:</strong>
+                  <strong><%= t('event.init_date')%></strong>
                   <%= @event.init_date %>
                   </p>
 
                   <p>
-                  <strong>End date:</strong>
+                  <strong><%= t('event.end_date')%></strong>
                   <%= @event.end_date %>
                   </p>
 
-                  <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-dark" %> |
-                  <%= link_to 'Back', events_path, class: "btn btn-primary" %>
+                  <%= link_to t("button_action.edit"), edit_event_path(@event), class: "btn btn-dark" %> |
+                  <%= link_to t("button_action.back"), events_path, class: "btn btn-primary" %>
                 </div>
             </div>
         </div>

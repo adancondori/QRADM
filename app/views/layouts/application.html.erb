@@ -19,13 +19,14 @@
     <div class="container-fluid">
     <div class="row">
       <%= render partial: 'layouts/navigation' %>
-      <% if notice %>
-        <p class="alert alert-success"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p class="alert alert-danger"><%= alert %></p>
-      <% end %>
+
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <% if notice %>
+          <p class="alert alert-success"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p class="alert alert-danger"><%= alert %></p>
+        <% end %>
          <%= yield  %>
       </main>
     </div>

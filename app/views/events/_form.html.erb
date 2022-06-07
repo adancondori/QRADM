@@ -29,12 +29,6 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <%= form.label :code, class: 'negrita' %>
-                                <div>
-                                    <%= form.text_field :code, class: 'form-control' %>
-                                </div>
-                            </div>
-                            <div class="form-group">
                               <%= form.label :amount, class: 'negrita' %>
                               <div>
                                   <%= form.number_field :amount, class: 'form-control' %>
@@ -43,7 +37,7 @@
                             <div class="form-group">
                               <%= form.label :type_validation, class: 'negrita' %>
                               <div>
-                                  <%= form.number_field :type_validation, class: 'form-control' %>
+                                  <%= form.select :type_validation, [["Validation QR", 1], ["Validación BarCode", 2]], {}, {class: "form-control"} %>
                               </div>
                             </div>
                             <div class="form-group">

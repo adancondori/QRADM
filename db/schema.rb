@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_20_034057) do
+ActiveRecord::Schema.define(version: 2022_06_07_034925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,14 @@ ActiveRecord::Schema.define(version: 2022_05_20_034057) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_activities_on_event_id"
+  end
+
+  create_table "custom_auto_increments", force: :cascade do |t|
+    t.string "counter_model_name"
+    t.integer "counter", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["counter_model_name"], name: "index_custom_auto_increments_on_counter_model_name"
   end
 
   create_table "events", force: :cascade do |t|

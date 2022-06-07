@@ -1,0 +1,14 @@
+es:
+  activerecord:
+    models:
+      event: Evento
+    attributes:
+      event:
+        name: Nombre
+        description: Descripción
+        content: Contenido
+        code: Código
+        amount: monto
+        type_validation: Tipo de Validación
+        init_date: Fecha inicio
+        init_fin: Fecha fin

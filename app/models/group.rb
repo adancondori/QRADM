@@ -3,6 +3,7 @@ class Group < ApplicationRecord
   has_many :group_activities
   has_many :group_sanctions
   has_many :group_extra_points
+  protokoll :code, :pattern => "GROUP%y%m#####"
 
   def sum_group_activities
     group_activities.where("group_id <= ?", self.id).sum(:amount)
