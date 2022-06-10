@@ -1,20 +1,20 @@
 class API::V1::Mobile::ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token
-  before_action :check_church_token
+  before_action :check_qradm_token
 
   RESPONSE_SUCCESSFULLY = 'SUCCESSFULLY'
   RESPONSE_BAD = 'ERROR'
 
-  def check_church_token
-    local_token = ENV['CHURCH_TOKEN']
-    request_token = request.headers['HTTP_CHURCH_TOKEN']
+  def check_qradm_token
+    local_token = ENV['QRADM_TOKEN']
+    request_token = request.headers['HTTP_QRADM_TOKEN']
     render json: { msg: 'NO VALID API KEY', type: RESPONSE_BAD }, status: :unauthorized unless local_token === request_token
   end
 
   def check_auth_user_token
     current_user
     update_last_login
-    render json: { msg: 'Your token is down, or your account was inactivated!', type: RESPONSE_BAD }, status: :unauthorized unless @person
+    render json: { msg: 'Your token is down, or your account was inactivated!', type: RESPONSE_BAD }, status: :unauthorized unless @user
   end
 
   def current_user
