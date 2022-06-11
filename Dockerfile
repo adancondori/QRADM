@@ -1,4 +1,5 @@
-FROM ruby:2.6.9
+#FROM ruby:2.6.9
+FROM ruby:2.7.5
 
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && apt-get update && \
     apt-get install -y nodejs --no-install-recommends && rm -rf /var/lib/apt/lists/*
