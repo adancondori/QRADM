@@ -1,5 +1,5 @@
 class API::V1::Mobile::EventsController < API::V1::Mobile::ApplicationController
-  before_action :check_auth_user_token
+  #before_action :check_auth_user_token
 
   def events
     events = Event.all

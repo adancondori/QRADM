@@ -60,7 +60,15 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      #@user = User.find(params[:id])
+      @user = User.new
+      if params[:id] == "sign_out"
+        @user = User.find(current_user.id )
+        sign_out current_user
+        return @user
+      elsif 
+        @user = User.find(params[:id])
+      end
     end
 
     # Only allow a list of trusted parameters through.

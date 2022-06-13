@@ -21,4 +21,9 @@ Things you may want to cover:
 
 * Deployment instructions
 
+Step to deploy
+
+./run.sh bash    
+/deployment/docker/compose/deployment/deploy.sh s100
+
 * ...

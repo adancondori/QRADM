@@ -1,6 +1,6 @@
 class API::V1::Mobile::ApplicationController < ActionController::Base
-  skip_before_action :verify_authenticity_token
-  before_action :check_qradm_token
+  #skip_before_action :verify_authenticity_token
+  #before_action :check_qradm_token
 
   RESPONSE_SUCCESSFULLY = 'SUCCESSFULLY'
   RESPONSE_BAD = 'ERROR'

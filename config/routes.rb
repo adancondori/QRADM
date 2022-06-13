@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+
   root to: "welcome#index"
   resources :parameters
   resources :group_extra_points
@@ -19,6 +19,10 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
 
+  devise_for :users #, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
+  # devise_scope :users do
+  #   get '/users/sign_out' => 'devise/sessions#destroy'
+  # end
   # section Api
   namespace :api do
     namespace :v1 do
