@@ -347,7 +347,7 @@ Resources:
           Value: '5432'
         - Namespace: aws:elasticbeanstalk:application:environment
           OptionName: RAILS_MASTER_KEY
-          Value: 8f9a2f1e7097707c857ae5abe407df7f
+          Value: e242a1e7f95d56a8d60d4c08be03a885
         - Namespace: aws:elasticbeanstalk:application:environment
           OptionName: AWS_ACCESS_KEY_ID
           Value: AKIAS6KSKZRAEM4LRDPA
