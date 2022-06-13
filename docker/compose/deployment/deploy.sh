@@ -11,7 +11,6 @@ fi
 ENVIRONMENT_NAME="eb-envr-$STACK_NAME"
 APP_NAME="eb-apr-$STACK_NAME"
 
-
 function create_app_version() {
   # default created by elastic beanstalk
   S3_BUCKET="elasticbeanstalk-us-east-1-034186551773"
