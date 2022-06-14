@@ -21,9 +21,9 @@ test:
 
 production:
   <<: *default
-  database: app_production
-  username: <%= ENV['DB_USERNAME'] || 'postgres' %>
-  host: <%= ENV['DB_HOST'] || 'db' %>
-  password: <%= ENV['DB_PASSWORD'] || '12345678' %>
-  url: <%= ENV['DATABASE_URL'] %>
+  database: <%= ENV['RDS_DB_NAME'] || 'postgres' %>
+  username: <%= ENV['RDS_USERNAME'] || 'postgres' %>
+  host: <%= ENV['RDS_HOSTNAME'] || 'db' %>
+  password: <%= ENV['RDS_PASSWORD'] || '12345678' %>
+  #url: <%= ENV['DATABASE_URL'] %>
   

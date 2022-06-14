@@ -134,6 +134,15 @@ Resources:
                 Resource:
                   - arn:aws:elasticbeanstalk:*:*:application/*
                   - arn:aws:elasticbeanstalk:*:*:environment/*
+              - Action: s3:PutObject
+                Effect: Allow
+                Resource: arn:aws:s3:::elasticbeanstalk-*/resources/environments/logs/*
+              - Action: s3:*
+                Effect: Allow
+                Resource: '*'
+              - Action: s3:*
+                Effect: Allow
+                Resource: !Sub arn:aws:s3:::${ProjectName}-app-assets-${Stack}
               - Action: cloudformation:DescribeStacks
                 Effect: Allow
                 Resource: '*'
@@ -146,6 +155,11 @@ Resources:
                 Effect: Allow
                 Resource: '*'
               - Action: swf:*
+                Effect: Allow
+                Resource: '*'
+              - Action:
+                  - s3:Get*
+                  - s3:List*
                 Effect: Allow
                 Resource: '*'
               - Action: cloudsearch:*
