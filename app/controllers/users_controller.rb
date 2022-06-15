@@ -65,7 +65,9 @@ class UsersController < ApplicationController
       if params[:id] == "sign_out"
         @user = User.find(current_user.id )
         sign_out current_user
-        return @user
+      elsif params[:id] == "sign_in"
+        @user = User.find(current_user.id )
+        sign_in current_user
       elsif 
         @user = User.find(params[:id])
       end
@@ -73,6 +75,10 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :last_name, :type_role, :phone, :state, :code, :event_id)
+      params.require(:user).permit(:name, :last_name, :type_role, :phone, :state, :code, :event_id,
+        :email,
+        :password,
+        :password_confirmation
+      )
     end
 end

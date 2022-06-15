@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :extra_points
   resources :group_sanctions
   resources :sanctions
-  resources :users
+  # resources :users
   resources :group_activities
   resources :activities
   resources :people
@@ -19,7 +19,15 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
 
-  devise_for :users #, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
+  devise_for :users , controllers: {
+    registrations: 'users/registrations',
+  }
+  devise_scope :user do
+    #get '/users/sign_out' => 'sessions#destroy'
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
+
+  #, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
   # devise_scope :users do
   #   get '/users/sign_out' => 'devise/sessions#destroy'
   # end

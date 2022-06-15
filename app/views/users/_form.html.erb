@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= form.label :type_role %>
-    <%= form.text_field :type_role %>
+    <%= form.select :type_role, options_for_select([['ADMINISTRADOR','ADMINISTRADOR'],['GUARDIA','GUARDIA'],['INVITADO','INVITADO']], :selected => params[:type_role]), {}, { :class => 'span3 controls controls-row' } %>
   </div>
 
   <div class="field">
@@ -38,7 +38,26 @@
 
   <div class="field">
     <%= form.label :event_id %>
-    <%= form.text_field :event_id %>
+    <%= form.select :event_id, options_from_collection_for_select(Event.all, 'id', 'name', '1') %>
+  </div>
+
+
+  <div class="field">
+    <%= form.label :email %><br />
+    <%= form.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= form.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password_confirmation %><br />
+    <%= form.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
   <div class="actions">
