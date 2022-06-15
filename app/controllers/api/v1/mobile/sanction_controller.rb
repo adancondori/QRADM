@@ -8,4 +8,13 @@ class API::V1::Mobile::SanctionController < API::V1::Mobile::ApplicationControll
       payload: ActiveModel::Serializer::CollectionSerializer.new(sanctions, serializer: SanctionSerializer)
     }
   end
+
+  def my_sanctions
+    sanctions = Sanction.all
+    code = params[:code_group]
+    render json: {
+      type: RESPONSE_SUCCESSFULLY,
+      payload: ActiveModel::Serializer::CollectionSerializer.new(sanctions, serializer: SanctionSerializer, code: code)
+    }
+  end
 end

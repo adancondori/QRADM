@@ -41,8 +41,10 @@ Rails.application.routes.draw do
         get 'events', to: 'events#events'
         get 'groups', to: 'groups#groups'
         get 'activities', to: 'activity#activities'
+        get 'my_activities', to: 'activity#my_activities'
         get 'extrapoints', to: 'extra_point#extrapoints'
         get 'sanctions', to: 'sanction#sanctions'
+        get 'my_sanctions', to: 'sanction#my_sanctions'
 
       end
     end
