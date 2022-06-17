@@ -28,12 +28,7 @@
 
   <div class="field">
     <%= form.label :sanction_id %>
-    <%= form.select :sanction_id, options_from_collection_for_select(Sanction.all, 'id', 'name', '1') %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+    <%= form.select :sanction_id, options_from_collection_for_select(Sanction.all, :id, :name_amount, '1') %>
   </div>
 
   <div class="actions">

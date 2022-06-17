@@ -28,7 +28,7 @@
 
   <div class="field">
     <%= form.label :extra_point_id %>
-    <%= form.select :extra_point_id, options_from_collection_for_select(ExtraPoint.all, 'id', 'name', '1') %>
+    <%= form.select :extra_point_id, options_from_collection_for_select(ExtraPoint.all, :id, :name_amount, '1') %>
   </div>
 
   <div class="actions">

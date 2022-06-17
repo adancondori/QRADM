@@ -12,17 +12,17 @@
 
 <p>
   <strong>Group:</strong>
-  <%= @group_sanction.group_id %>
+  <%= @group_sanction.group.name %>
 </p>
 
 <p>
   <strong>Sanction:</strong>
-  <%= @group_sanction.sanction_id %>
+  <%= @group_sanction.sanction.name %>
 </p>
 
 <p>
   <strong>User:</strong>
-  <%= @group_sanction.user_id %>
+  <%= @group_sanction.user.full_name %>
 </p>
 
 <%= link_to 'Edit', edit_group_sanction_path(@group_sanction) %> |

@@ -5,6 +5,7 @@ class CreateGroupExtraPoints < ActiveRecord::Migration[6.1]
       t.datetime :date_done
       t.references :group, null: false, foreign_key: true
       t.references :extra_point, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end

@@ -28,7 +28,7 @@
 
   <div class="field">
     <%= form.label :activity_id %>
-    <%= form.select :activity_id, options_from_collection_for_select(Activity.all, 'id', 'name', '1') %>
+    <%= form.select :activity_id, options_from_collection_for_select(Activity.all, :id, :name_amount, '1') %>
   </div>
 
   <div class="field">

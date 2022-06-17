@@ -18,8 +18,14 @@ class API::V1::Mobile::ApplicationController < ActionController::Base
   end
 
   def current_user
-    token_header = request.headers["HTTP_USER_TOKEN"]
-    @user = User.find_by_app_token(token_header) if token_header.present?
+    token_header = request.headers["HTTP_CODE"]
+    @user = nil
+    return @user if !token_header.present?
+    if token_header.include? "PERSON"
+      @user = Person.find_by(code: token_header)
+    elsif token_header.include? "USER"
+      @user = User.find_by(code: token_header)
+    end
   end
 
   def update_last_login

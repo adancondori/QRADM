@@ -37,6 +37,7 @@ Rails.application.routes.draw do
       namespace :mobile do
         post 'sign_up', to: 'auth#sign_up'
         post 'log_out', to: 'auth#log_out'
+        post 'log_in', to: 'auth#log_in'
         post 'check_uid', to: 'auth#check_uid'
         get 'events', to: 'events#events'
         get 'groups', to: 'groups#groups'

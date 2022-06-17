@@ -1,8 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
   belongs_to :event, optional: true
   protokoll :code, :pattern => "USER%y%m#####"
 
@@ -10,4 +9,8 @@ class User < ApplicationRecord
     app_token = Devise.friendly_token[0, 10]
     update(app_token: app_token)
   end
+
+  def full_name
+    "#{name} #{last_name}"
+  end 
 end

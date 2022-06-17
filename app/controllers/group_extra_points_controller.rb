@@ -22,6 +22,7 @@ class GroupExtraPointsController < ApplicationController
   # POST /group_extra_points or /group_extra_points.json
   def create
     @group_extra_point = GroupExtraPoint.new(group_extra_point_params)
+    @group_extra_point.user_id = current_user.id
 
     respond_to do |format|
       if @group_extra_point.save

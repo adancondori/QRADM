@@ -12,12 +12,16 @@
 
 <p>
   <strong>Group:</strong>
-  <%= @group_extra_point.group_id %>
+  <%= @group_extra_point.group.name %>
 </p>
 
 <p>
   <strong>Extra point:</strong>
-  <%= @group_extra_point.extra_point_id %>
+  <%= @group_extra_point.extra_point.name %>
+</p>
+<p>
+  <strong>User:</strong>
+  <%= @group_extra_point.user.full_name %>
 </p>
 
 <%= link_to 'Edit', edit_group_extra_point_path(@group_extra_point) %> |
