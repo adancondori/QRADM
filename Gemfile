@@ -62,3 +62,4 @@ gem 'grape-active_model_serializers'
 gem 'devise'
 gem 'pg_search'
 gem 'protokoll'
+gem "rqrcode", "~> 2.0"

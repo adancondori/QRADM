@@ -41,10 +41,20 @@ Rails.application.routes.draw do
         post 'check_uid', to: 'auth#check_uid'
         get 'events', to: 'events#events'
         get 'groups', to: 'groups#groups'
+        get 'group_qrscan', to: 'groups#group_qrscan'
+
         get 'activities', to: 'activity#activities'
         get 'my_activities', to: 'activity#my_activities'
+        post 'save_group_activity', to: 'activity#save_group_activity'
+        
         get 'extrapoints', to: 'extra_point#extrapoints'
+        get 'my_extrapoints', to: 'extra_point#my_extrapoints'
+        post 'save_group_extrapoint', to: 'extra_point#save_group_extrapoint'
+
         get 'sanctions', to: 'sanction#sanctions'
+        get 'my_sanctions', to: 'sanction#my_sanctions'
+        post 'save_group_sanction', to: 'sanction#save_group_sanction'
+        
         get 'my_sanctions', to: 'sanction#my_sanctions'
 
       end

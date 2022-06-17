@@ -38,6 +38,12 @@
                     <strong><%= t('group.event_id')%></strong>
                     <%= @group.event.name %>
                   </p>
+                  <p>
+                    <strong><%= "QR"%></strong>
+                    <img src="<%= @group.generate_qr.to_data_url %>"
+                  </p>
+                  
+
                   <h3>Puntos</h3>
                   <%= render partial: 'table_points', locals: {group: @group } %>
                   <p>

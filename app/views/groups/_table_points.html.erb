@@ -17,7 +17,7 @@
       <td><%= "Actividades" %></td>
       <td><%= group_activity.activity.name %></td>
       <td><%= group_activity.amount %></td>
-      <td><%= group_activity.date_done.strftime("%-d/%-m/%y: %H:%M") %></td>
+      <td><%= group_activity.date_done.strftime("%-d/%-m/%y: %H:%M") if group_activity.date_done.present? %></td>
       <td><%= group_activity.user.name %></td>
       <td><%= link_to 'Show', group_activity, class: "btn btn-dark" %></td>
       <td><%= link_to 'Edit', edit_group_activity_path(group_activity), class: "btn btn-primary" %></td>
@@ -28,8 +28,8 @@
     <tr>
       <td><%= "Sanciones" %></td>
       <td><%= group_sanction.sanction.name %></td>
-      <td><%= group_sanction.amount %></td>
-      <td><%= group_sanction.date_done.strftime("%-d/%-m/%y: %H:%M") %></td>
+      <td> - <%= group_sanction.amount %></td>
+      <td><%= group_sanction.date_done.strftime("%-d/%-m/%y: %H:%M") if group_sanction.date_done.present?%></td>
       <td><%= group_sanction.user.name %></td>
       <td><%= link_to 'Show', group_sanction, class: "btn btn-dark" %></td>
       <td><%= link_to 'Edit', edit_group_sanction_path(group_sanction), class: "btn btn-primary" %></td>
@@ -41,8 +41,8 @@
       <td><%= "Puntos Extras" %></td>
       <td><%= group_extra_point.extra_point.name %></td>
       <td><%= group_extra_point.amount %></td>
-      <td><%= group_extra_point.date_done.strftime("%-d/%-m/%y: %H:%M") %></td>
-      <td><%= "group_extra_point.user_id" %></td>
+      <td><%= group_extra_point.date_done.strftime("%-d/%-m/%y: %H:%M") if group_extra_point.date_done.present?%></td>
+      <td><%= group_extra_point.user.name %></td>
       <td><%= link_to 'Show', group_extra_point, class: "btn btn-dark" %></td>
       <td><%= link_to 'Edit', edit_group_extra_point_path(group_extra_point), class: "btn btn-primary" %></td>
       <td><%= link_to 'Destroy', group_extra_point, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>

@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 2022_06_13_043914) do
   create_table "group_extra_points", force: :cascade do |t|
     t.decimal "amount", precision: 10, scale: 2
     t.datetime "date_done"
+    t.string "observation"
     t.bigint "group_id", null: false
     t.bigint "extra_point_id", null: false
     t.bigint "user_id", null: false
@@ -98,6 +99,7 @@ ActiveRecord::Schema.define(version: 2022_06_13_043914) do
   create_table "group_sanctions", force: :cascade do |t|
     t.decimal "amount", precision: 10, scale: 2
     t.datetime "date_done"
+    t.string "observation"
     t.bigint "group_id", null: false
     t.bigint "sanction_id", null: false
     t.bigint "user_id", null: false
