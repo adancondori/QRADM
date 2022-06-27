@@ -3,6 +3,6 @@ class SanctionSerializer < ActiveModel::Serializer
 
     def my_sanction
         code = @instance_options[:code]
-        my_activity = GroupSanction.includes(:group).where("groups.code = '#{code}' and group_id = groups.id and sanction_id = #{object.id}").references(:group).first
+        GroupSanction.includes(:group).where("groups.code = '#{code}' and group_id = groups.id and sanction_id = #{object.id}").references(:group).first
     end
 end

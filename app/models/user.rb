@@ -5,6 +5,8 @@ class User < ApplicationRecord
   belongs_to :event, optional: true
   protokoll :code, :pattern => "USER%y%m#####"
 
+  TYPES_ROLE = [['ADMINISTRADOR','ADMINISTRATOR'],['GUARDIA','STAFF'],['INVITADO','GUEST']]
+
   def generate_app_token
     app_token = Devise.friendly_token[0, 10]
     update(app_token: app_token)
@@ -12,5 +14,9 @@ class User < ApplicationRecord
 
   def full_name
     "#{name} #{last_name}"
-  end 
+  end
+
+  def self.get_rol_invited
+    TYPES_ROLE[0][2]
+  end
 end

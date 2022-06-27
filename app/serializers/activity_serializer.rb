@@ -15,6 +15,6 @@ class ActivitySerializer < ActiveModel::Serializer
 
     def my_activity
         code = @instance_options[:code]
-        my_activity = GroupActivity.includes(:group).where("groups.code = '#{code}' and group_id = groups.id and activity_id = #{object.id}").references(:group).first
+        GroupActivity.includes(:group).where("groups.code = '#{code}' and group_id = groups.id and activity_id = #{object.id}").references(:group).first
     end
 end

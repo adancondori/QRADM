@@ -2,7 +2,7 @@ class API::V1::Mobile::ActivityController < API::V1::Mobile::ApplicationControll
   #before_action :check_auth_user_token
 
   def activities
-    activities = Activity.all
+    activities = Activity.visible.all
     render json: {
       type: RESPONSE_SUCCESSFULLY,
       payload: ActiveModel::Serializer::CollectionSerializer.new(activities, serializer: ActivitySerializer)
@@ -10,7 +10,7 @@ class API::V1::Mobile::ActivityController < API::V1::Mobile::ApplicationControll
   end
 
   def my_activities
-    activities = Activity.all
+    activities = Activity.visible.all
     code = params[:code_group]
     render json: {
       type: RESPONSE_SUCCESSFULLY,
@@ -20,7 +20,7 @@ class API::V1::Mobile::ActivityController < API::V1::Mobile::ApplicationControll
 
   def save_group_activity
     group = Group.find_by(code: params[:code_group])
-    activity = Activity.find(params[:activity_id])
+    activity = Activity.find(params[:id])
     value = params[:value]
     observation = params[:observation]
     user = current_user

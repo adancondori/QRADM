@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   resources :group_activities
   resources :activities
   resources :people
-  resources :groups
+  resources :groups do
+    collection { post :import }
+  end
   resources :events do
     member do
       get 'event_groups'

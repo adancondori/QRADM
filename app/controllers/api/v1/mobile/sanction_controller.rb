@@ -20,7 +20,7 @@ class API::V1::Mobile::SanctionController < API::V1::Mobile::ApplicationControll
 
   def save_group_sanction
     group = Group.find_by(code: params[:code_group])
-    sanction = Sanction.find(params[:sanction_id])
+    sanction = Sanction.find(params[:id])
     value = params[:value]
     observation = params[:observation]
     user = current_user

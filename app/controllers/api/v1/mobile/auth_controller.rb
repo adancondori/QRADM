@@ -38,9 +38,9 @@ class API::V1::Mobile::AuthController < API::V1::Mobile::ApplicationController
     else
       render json: {
         type: RESPONSE_BAD,
-        msg: 'Error al iniciar Sesion',
+        msg: 'Error al iniciar Sesion, intente nuevamente.',
         payload: nil
-      }
+      }, status: 201
     end
   end
 

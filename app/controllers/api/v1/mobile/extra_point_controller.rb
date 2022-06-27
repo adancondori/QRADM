@@ -21,7 +21,7 @@ class API::V1::Mobile::ExtraPointController < API::V1::Mobile::ApplicationContro
 
   def save_group_extrapoint
     group = Group.find_by(code: params[:code_group])
-    extrapoint = ExtraPoint.find(params[:extrapoint_id])
+    extrapoint = ExtraPoint.find(params[:id])
     value = params[:value]
     observation = params[:observation]
     user = current_user
