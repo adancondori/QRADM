@@ -58,7 +58,7 @@ class Group < ApplicationRecord
       #                              code: product_hash['ci'],
       #                              state: product_hash['estado'],
       #                              event_id: product_hash['campamento'],)
-      byebug
+      # byebug
       group = Group.find_by(code: product_hash['ci'])
       group = Group.new if group == nil
 
@@ -67,7 +67,7 @@ class Group < ApplicationRecord
       group.code = product_hash['ci']
       group.state = product_hash['estado']
       group.event_id = product_hash['campamento']
-      group.save
+      group.save!
 
       user = User.new
       user.name = group.name
@@ -75,11 +75,12 @@ class Group < ApplicationRecord
       user.type_role = User.get_rol_invited
       user.phone = ""
       user.state = group.state
-      user.email = product_hash['email']
+      user.email = group.code + "@gmail.com"
       user.password = '123456'
       user.event_id = group.event_id
-      user.people_id = 0
-
+      user.app_token = group.code
+      # user.people_id = 0
+      user.save!
     end
   end
 end

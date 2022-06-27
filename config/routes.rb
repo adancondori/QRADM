@@ -44,6 +44,7 @@ Rails.application.routes.draw do
         get 'events', to: 'events#events'
         get 'groups', to: 'groups#groups'
         get 'group_qrscan', to: 'groups#group_qrscan'
+        get 'group_details', to: 'groups#group_details'
 
         get 'activities', to: 'activity#activities'
         get 'my_activities', to: 'activity#my_activities'
@@ -56,8 +57,6 @@ Rails.application.routes.draw do
         get 'sanctions', to: 'sanction#sanctions'
         get 'my_sanctions', to: 'sanction#my_sanctions'
         post 'save_group_sanction', to: 'sanction#save_group_sanction'
-        
-        get 'my_sanctions', to: 'sanction#my_sanctions'
 
       end
     end

@@ -17,6 +17,6 @@ class User < ApplicationRecord
   end
 
   def self.get_rol_invited
-    TYPES_ROLE[0][2]
+    TYPES_ROLE[2][1]
   end
 end

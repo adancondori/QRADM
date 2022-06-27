@@ -22,6 +22,9 @@ class API::V1::Mobile::ApplicationController < ActionController::Base
     @user = nil
     return @user if !token_header.present?
     @user = User.find_by(email: token_header)
+    if !@user.present?
+      @user = User.find_by(app_token: token_header)
+    end
     # if token_header.include? "PERSON"
     #   @user = Person.find_by(email: token_header)
     # elsif token_header.include? "USER"
