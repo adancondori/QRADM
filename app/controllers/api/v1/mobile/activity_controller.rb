@@ -24,6 +24,7 @@ class API::V1::Mobile::ActivityController < API::V1::Mobile::ApplicationControll
     value = params[:value]
     observation = params[:observation]
     user = current_user
+    byebug
     group_activity = GroupActivity.new(amount: value, 
                                       group_id: group.id,
                                       activity_id: activity.id,

@@ -22,14 +22,16 @@ class API::V1::Mobile::ApplicationController < ActionController::Base
     @user = nil
     return @user if !token_header.present?
     @user = User.find_by(email: token_header)
-    if !@user.present?
+    if @user.nil?
       @user = User.find_by(app_token: token_header)
     end
+    @user
     # if token_header.include? "PERSON"
     #   @user = Person.find_by(email: token_header)
     # elsif token_header.include? "USER"
     #   @user = User.find_by(code: token_header)
     # end
+
   end
 
   def update_last_login
