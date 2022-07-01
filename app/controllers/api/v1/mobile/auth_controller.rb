@@ -27,6 +27,23 @@ class API::V1::Mobile::AuthController < API::V1::Mobile::ApplicationController
     }
   end
 
+  def log_in
+    user = current_user
+    if user.present?
+      sign_in user
+      render json: {
+        type: RESPONSE_SUCCESSFULLY,
+        payload: UserSerializer.new(user)
+      }
+    else
+      render json: {
+        type: RESPONSE_BAD,
+        msg: 'Error al iniciar Sesion, intente nuevamente.',
+        payload: nil
+      }, status: 201
+    end
+  end
+
   def check_uid
     uuid = params[:uuid]
     provider = params[:provider] # facebook, apple, email

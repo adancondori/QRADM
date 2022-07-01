@@ -33,12 +33,7 @@
 
   <div class="field">
     <%= form.label :group_id %>
-    <%= form.text_field :group_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :event %>
-    <%= form.text_field :event %>
+    <%= form.select :group_id, options_from_collection_for_select(Group.all, 'id', 'name', '1') %>
   </div>
 
   <div class="actions">

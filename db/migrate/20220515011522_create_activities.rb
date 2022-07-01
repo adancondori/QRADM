@@ -12,6 +12,7 @@ class CreateActivities < ActiveRecord::Migration[6.1]
       t.boolean :state, default: true
       t.boolean :is_visible, default: true
       t.references :event, null: false, foreign_key: true
+      t.references :user, null: true, foreign_key: true
 
       t.timestamps
     end

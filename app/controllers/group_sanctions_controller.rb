@@ -22,6 +22,7 @@ class GroupSanctionsController < ApplicationController
   # POST /group_sanctions or /group_sanctions.json
   def create
     @group_sanction = GroupSanction.new(group_sanction_params)
+    @group_sanction.user_id = current_user.id
 
     respond_to do |format|
       if @group_sanction.save

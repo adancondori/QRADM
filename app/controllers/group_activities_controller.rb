@@ -22,6 +22,7 @@ class GroupActivitiesController < ApplicationController
   # POST /group_activities or /group_activities.json
   def create
     @group_activity = GroupActivity.new(group_activity_params)
+    @group_activity.user_id = current_user.id
 
     respond_to do |format|
       if @group_activity.save

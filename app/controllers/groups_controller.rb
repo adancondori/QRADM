@@ -1,13 +1,19 @@
+require "rqrcode"
 class GroupsController < ApplicationController
   before_action :set_group, only: %i[ show edit update destroy ]
 
   # GET /groups or /groups.json
   def index
     @groups = Group.all
+    respond_to do |format|
+      format.html
+      format.csv { send_data @groups.to_csv(['name', 'code', 'description']) }
+    end
   end
 
   # GET /groups/1 or /groups/1.json
   def show
+
   end
 
   # GET /groups/new
@@ -45,6 +51,11 @@ class GroupsController < ApplicationController
         format.json { render json: @group.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def import
+    Group.import(params[:file])
+    redirect_to root_url, notice: "Products imported."
   end
 
   # DELETE /groups/1 or /groups/1.json

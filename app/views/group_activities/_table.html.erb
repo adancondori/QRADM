@@ -1,4 +1,3 @@
-<%= puts "------ -- ENTROO" %>
 <table>
   <thead>
   <tr>
@@ -17,10 +16,10 @@
     <tr>
       <td><%= group_activity.amount %></td>
       <td><%= group_activity.date_done %></td>
-      <td><%= group_activity.group_id %></td>
-      <td><%= group_activity.activity_id %></td>
+      <td><%= group_activity.group.name %></td>
+      <td><%= group_activity.activity.name %></td>
       <td><%= group_activity.observation %></td>
-      <td><%= group_activity.user_id %></td>
+      <td><%= group_activity.user.full_name %></td>
       <td><%= link_to 'Show', group_activity %></td>
       <td><%= link_to 'Edit', edit_group_activity_path(group_activity) %></td>
       <td><%= link_to 'Destroy', group_activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>

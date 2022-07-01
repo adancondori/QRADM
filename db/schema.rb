@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_13_043914) do
+ActiveRecord::Schema.define(version: 2022_06_26_140553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,9 +27,11 @@ ActiveRecord::Schema.define(version: 2022_06_13_043914) do
     t.boolean "state", default: true
     t.boolean "is_visible", default: true
     t.bigint "event_id", null: false
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_activities_on_event_id"
+    t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
   create_table "custom_auto_increments", force: :cascade do |t|
@@ -57,10 +59,13 @@ ActiveRecord::Schema.define(version: 2022_06_13_043914) do
     t.decimal "amount", precision: 10, scale: 2
     t.string "name"
     t.string "description"
+    t.string "code"
     t.bigint "event_id", null: false
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_extra_points_on_event_id"
+    t.index ["user_id"], name: "index_extra_points_on_user_id"
   end
 
   create_table "group_activities", force: :cascade do |t|
@@ -80,17 +85,21 @@ ActiveRecord::Schema.define(version: 2022_06_13_043914) do
   create_table "group_extra_points", force: :cascade do |t|
     t.decimal "amount", precision: 10, scale: 2
     t.datetime "date_done"
+    t.string "observation"
     t.bigint "group_id", null: false
     t.bigint "extra_point_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["extra_point_id"], name: "index_group_extra_points_on_extra_point_id"
     t.index ["group_id"], name: "index_group_extra_points_on_group_id"
+    t.index ["user_id"], name: "index_group_extra_points_on_user_id"
   end
 
   create_table "group_sanctions", force: :cascade do |t|
     t.decimal "amount", precision: 10, scale: 2
     t.datetime "date_done"
+    t.string "observation"
     t.bigint "group_id", null: false
     t.bigint "sanction_id", null: false
     t.bigint "user_id", null: false
@@ -127,8 +136,9 @@ ActiveRecord::Schema.define(version: 2022_06_13_043914) do
     t.string "last_name"
     t.string "phone"
     t.string "code"
+    t.string "email"
     t.boolean "state", default: true
-    t.bigint "group_id", null: false
+    t.bigint "group_id"
     t.bigint "event_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -140,8 +150,9 @@ ActiveRecord::Schema.define(version: 2022_06_13_043914) do
     t.decimal "amount", precision: 10, scale: 2
     t.string "name"
     t.string "description"
+    t.string "code"
     t.bigint "event_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_sanctions_on_event_id"
@@ -164,24 +175,31 @@ ActiveRecord::Schema.define(version: 2022_06_13_043914) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "app_token"
+    t.bigint "people_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["event_id"], name: "index_users_on_event_id"
+    t.index ["people_id"], name: "index_users_on_people_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "activities", "events"
+  add_foreign_key "activities", "users"
   add_foreign_key "extra_points", "events"
+  add_foreign_key "extra_points", "users"
   add_foreign_key "group_activities", "activities"
   add_foreign_key "group_activities", "groups"
   add_foreign_key "group_activities", "users"
   add_foreign_key "group_extra_points", "extra_points"
   add_foreign_key "group_extra_points", "groups"
+  add_foreign_key "group_extra_points", "users"
   add_foreign_key "group_sanctions", "groups"
   add_foreign_key "group_sanctions", "sanctions"
   add_foreign_key "group_sanctions", "users"
   add_foreign_key "groups", "events"
+  add_foreign_key "people", "events"
   add_foreign_key "people", "groups"
   add_foreign_key "sanctions", "events"
   add_foreign_key "sanctions", "users"
   add_foreign_key "users", "events"
+  add_foreign_key "users", "people", column: "people_id"
 end
