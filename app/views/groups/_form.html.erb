@@ -1,3 +1,4 @@
+
 <%= form_with(model: group) do |form| %>
   <% if group.errors.any? %>
     <div id="error_explanation">
@@ -10,29 +11,44 @@
       </ul>
     </div>
   <% end %>
+  <div class="row">
+                <div class="col-md-12">
+                    <section class="panel">
+                        <div class="panel-body">
+                          <div class="form-group">
+                            <%= form.label :name, class: 'negrita' %>
+                              <div>
+                                <%= form.text_field :name, class: 'form-control' %>
+                              </div>
+                          </div>
+                      
+                          <div class="form-group">
+                            <%= form.label :description, class: 'negrita' %>
+                              <div>
+                                <%= form.text_area :description, class: 'form-control' %>
+                              </div>
+                          </div>
+                          
+                          <div class="field">
+                            <%= form.label :state %>
+                            <%= form.check_box :state %>
+                          </div>
+                      
+                          <div class="field">
+                            <%= form.label :event_id %>
+                              <%= form.select :event_id, options_from_collection_for_select(Event.all, 'id', 'name', '1') %>
+                          </div>
+                      
+                          <div class="actions">
+                            <%= form.submit %>
+                          </div>
+                          
+                            <br />
+                            <br />
+                        </div>
+                    </section>
+                </div>
+            </div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :state %>
-    <%= form.check_box :state %>
-  </div>
-
-  <div class="field">
-    <%= form.label :event_id %>
-    <%= form.select :event_id, options_from_collection_for_select(Event.all, 'id', 'name', '1') %>
-
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  
 <% end %>

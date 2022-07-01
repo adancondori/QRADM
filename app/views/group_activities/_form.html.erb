@@ -1,43 +1,64 @@
-<%= form_with(model: group_activity) do |form| %>
-  <% if group_activity.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(group_activity.errors.count, "error") %> prohibited this group_activity from being saved:</h2>
+<div class="card-block">
+    <section class="example">
+    <%= form_with(model: group_activity) do |form| %>
+      <% if group_activity.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(group_activity.errors.count, "error") %> prohibited this group_activity from being saved:</h2>
+    
+          <ul>
+            <% group_activity.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="panel">
+                        <div class="panel-body">
+                          <div class="form-group">
+                            <%= form.label :amount, class: 'negrita' %>
+                            <%= form.text_field :amount, class: 'form-control' %>
+                          </div>
+                                
+                        <div class="form-group">
+                          <%= form.label :date_done %>
+                          <%= form.datetime_select :date_done %>
+                        </div>
+                                
+                        <div class="form-group">
+                          <%= form.label :group_id %>
+                          <%= form.select :group_id, options_from_collection_for_select(Group.all, 'id', 'name', '1') %>
+                        </div>
+                                
+                        <div class="form-group">
+                          <%= form.label :activity_id %>
+                          <%= form.select :activity_id, options_from_collection_for_select(Activity.all, 'id', 'name', '1') %>
+                        </div>
+                                
+                        <div class="form-group">
+                          <%= form.label :observation, class: 'negrita' %>
+                          <%= form.text_field :observation, class: 'form-control' %>
+                        </div>
+                                
+                        <div class="form-group">
+                          <%= form.label :user_id, class: 'negrita'%>
+                          <%= form.text_field :user_id, class: 'form-control' %>
+                        </div>
+                                
+                        <div class="actions">
+                          <%= form.submit %>
+                        </div>
 
-      <ul>
-        <% group_activity.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+                
+                  
+                            <br />
+                            <br />
+                        </div>
+                    </section>
+                </div>
+            </div>
+      <% end %>
+    </section>
+</div>
 
-  <div class="field">
-    <%= form.label :amount %>
-    <%= form.text_field :amount %>
-  </div>
-
-  <div class="field">
-    <%= form.label :date_done %>
-    <%= form.datetime_select :date_done %>
-  </div>
-
-  <div class="field">
-    <%= form.label :group_id %>
-    <%= form.select :group_id, options_from_collection_for_select(Group.all, 'id', 'name', '1') %>
-  </div>
-
-  <div class="field">
-    <%= form.label :activity_id %>
-    <%= form.select :activity_id, options_from_collection_for_select(Activity.all, :id, :name_amount, '1') %>
-  </div>
-
-  <div class="field">
-    <%= form.label :observation %>
-    <%= form.text_field :observation %>
-  </div>
-
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>

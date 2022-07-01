@@ -1,59 +1,82 @@
-<p id="notice"><%= notice %></p>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Dashboard</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Postres</li>
+      </ol>
+    </nav>
+</div>
+<div class="card-block">
+    <section class="text-center">
+        <div class="container">
+            <h3 class="jumbotron-heading"><%= @activity.name %></h3>
+        </div>
+    </section>
 
-<p>
-  <strong>Name:</strong>
-  <%= @activity.name %>
-</p>
+    <div class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" align="left">
+                <p>
+                <strong>Name:</strong>
+                <%= @activity.name %>
+              </p>
+              
+              <p>
+                <strong>Description:</strong>
+                <%= @activity.description %>
+              </p>
+              
+              <p>
+                <strong>Rules:</strong>
+                <%= @activity.rules %>
+              </p>
+              
+              <p>
+                <strong>Code:</strong>
+                <%= @activity.code %>
+              </p>
+              
+              <p>
+                <strong>Date init:</strong>
+                <%= @activity.date_init %>
+              </p>
+              
+              <p>
+                <strong>Date end:</strong>
+                <%= @activity.date_end %>
+              </p>
+              
+              <p>
+                <strong>Amount:</strong>
+                <%= @activity.amount %>
+              </p>
+              
+              <p>
+                <strong>Is close:</strong>
+                <%= @activity.is_close %>
+              </p>
+              
+              <p>
+                <strong>State:</strong>
+                <%= @activity.state %>
+              </p>
+              
+              <p>
+                <strong>Ifds visible:</strong>
+                <%= @activity.is_visible %>
+              </p>
+              
+              <p>
+                <strong><%= t('activity.event')%></strong>
+                <%= @activity.event.name %>
+              </p>
+              <%= link_to t("button_action.edit"), edit_activity_path(@activity), class: "btn btn-dark" %> |
+              <%= link_to t("button_action.back"), activities_path, class: "btn btn-primary" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @activity.description %>
-</p>
-
-<p>
-  <strong>Rules:</strong>
-  <%= @activity.rules %>
-</p>
-
-<p>
-  <strong>Code:</strong>
-  <%= @activity.code %>
-</p>
-
-<p>
-  <strong>Date init:</strong>
-  <%= @activity.date_init %>
-</p>
-
-<p>
-  <strong>Date end:</strong>
-  <%= @activity.date_end %>
-</p>
-
-<p>
-  <strong>Amount:</strong>
-  <%= @activity.amount %>
-</p>
-
-<p>
-  <strong>Is close:</strong>
-  <%= @activity.is_close %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @activity.state %>
-</p>
-
-<p>
-  <strong>Is visible:</strong>
-  <%= @activity.is_visible %>
-</p>
-
-<p>
-  <strong>Event:</strong>
-  <%= @activity.event_id %>
-</p>
-
-<%= link_to 'Edit', edit_activity_path(@activity) %> |
-<%= link_to 'Back', activities_path %>

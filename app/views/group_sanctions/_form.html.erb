@@ -1,37 +1,58 @@
-<%= form_with(model: group_sanction) do |form| %>
-  <% if group_sanction.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(group_sanction.errors.count, "error") %> prohibited this group_sanction from being saved:</h2>
+<div class="card-block">
+    <section class="example">
+    <%= form_with(model: group_sanction) do |form| %>
+      <% if group_sanction.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(group_sanction.errors.count, "error") %> prohibited this group_sanction from being saved:</h2>
+      
+          <ul>
+            <% group_sanction.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+          </ul>
+            </div>
+          <% end %>
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="panel">
+                        <div class="panel-body">
 
-      <ul>
-        <% group_sanction.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+                        <div class="field">
+                        <%= form.label :amount, class: 'negrita' %>
+                        <%= form.text_field :amount, class: 'form-control' %>
+                      </div>
+                    
+                      <div class="field">
+                        <%= form.label :date_done %>
+                        <%= form.datetime_select :date_done %>
+                      </div>
+                    
+                      <div class="field">
+                        <%= form.label :group_id, class: 'negrita' %>
+                        <%= form.select :group_id, options_from_collection_for_select(Group.all, 'id', 'name', '1') %>
+                      </div>
+                    
+                      <div class="field">
+                        <%= form.label :sanction_id %>
+                        <%= form.select :sanction_id, options_from_collection_for_select(Sanction.all, 'id', 'name', '1') %>
+                      </div>
+                    
+                      <div class="field">
+                        <%= form.label :user_id, class: 'negrita' %>
+                        <%= form.text_field :user_id, class: 'form-control'  %>
+                      </div>
+                    
+                      <div class="actions">
+                        <%= form.submit %>
+                      </div>
+                            <br />
+                            <br />
+                        </div>
+                    </section>
+                </div>
+            </div>
+      <% end %>
+    </section>
+</div>
 
-  <div class="field">
-    <%= form.label :amount %>
-    <%= form.text_field :amount %>
-  </div>
 
-  <div class="field">
-    <%= form.label :date_done %>
-    <%= form.datetime_select :date_done %>
-  </div>
-
-  <div class="field">
-    <%= form.label :group_id %>
-    <%= form.select :group_id, options_from_collection_for_select(Group.all, 'id', 'name', '1') %>
-  </div>
-
-  <div class="field">
-    <%= form.label :sanction_id %>
-    <%= form.select :sanction_id, options_from_collection_for_select(Sanction.all, :id, :name_amount, '1') %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
