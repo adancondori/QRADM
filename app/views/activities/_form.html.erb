@@ -1,67 +1,91 @@
-<%= form_with(model: activity) do |form| %>
-  <% if activity.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
-
-      <ul>
-        <% activity.errors.each do |error| %>
+<div class="card-block">
+    <section class="example">
+    <%= form_with(model: activity) do |form| %>
+      <% if activity.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
+      
+            <ul>
+              <% activity.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
+            </ul>
+          </div>
+        <% end %>
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="panel">
+                        <div class="panel-body">
+                          <div class="form-group">
+                            <%= form.label :name, class: 'negrita' %>
+                            <div>
+                              <%= form.text_field :name, class: 'form-control' %>
+                            </div>
+                          </div>
+                    
+                          <div class="form-group">
+                            <%= form.label :description, class: 'negrita' %>
+                            <div>
+                              <%= form.text_area :description, class: 'form-control' %>
+                            </div>
+                          </div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+                          <div class="form-group">
+                            <%= form.label :rules, class: 'negrita' %>
+                            <div>
+                              <%= form.text_area :rules, class: 'form-control' %>
+                          </div>
+                        </div>
+                    
+                      <div class="field">
+                        <%= form.label :date_init %>
+                        <%= form.datetime_select :date_init %>
+                      </div>
+                    
+                      <div class="field">
+                        <%= form.label :date_end %>
+                        <%= form.datetime_select :date_end %>
+                      </div>
+                    
+                      <div class="form-group">
+                        <%= form.label :amount, class: 'negrita' %>
+                        <div>
+                          <%= form.text_area :amount, class: 'form-control' %>
+                      </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
+                      <div class="field">
+                        <%= form.label :is_close %>
+                        <%= form.check_box :is_close %>
+                      </div>
+                    
+                      <div class="field">
+                        <%= form.label :state %>
+                        <%= form.check_box :state %>
+                      </div>
+                    
+                      <div class="field">
+                        <%= form.label :is_visible %>
+                        <%= form.check_box :is_visible %>
+                      </div>
+                    
+                      <div class="field">
+                        <%= form.label :event_id %>
+                        <%= form.select :event_id, options_from_collection_for_select(Event.all, 'id', 'name', '1') %>
+                      </div>
+                    
+                      <div class="actions">
+                        <%= form.submit %>
+                      </div>
+                  
+                            <br />
+                            <br />
+                        </div>
+                    </section>
+                </div>
+            </div>
+      <% end %>
+    </section>
+</div>
 
-  <div class="field">
-    <%= form.label :rules %>
-    <%= form.text_area :rules %>
-  </div>
 
-  <div class="field">
-    <%= form.label :date_init %>
-    <%= form.datetime_select :date_init %>
-  </div>
 
-  <div class="field">
-    <%= form.label :date_end %>
-    <%= form.datetime_select :date_end %>
-  </div>
-
-  <div class="field">
-    <%= form.label :amount %>
-    <%= form.text_field :amount %>
-  </div>
-
-  <div class="field">
-    <%= form.label :is_close %>
-    <%= form.check_box :is_close %>
-  </div>
-
-  <div class="field">
-    <%= form.label :state %>
-    <%= form.check_box :state %>
-  </div>
-
-  <div class="field">
-    <%= form.label :is_visible %>
-    <%= form.check_box :is_visible %>
-  </div>
-
-  <div class="field">
-    <%= form.label :event_id %>
-    <%= form.select :event_id, options_from_collection_for_select(Event.all, 'id', 'name', '1') %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>

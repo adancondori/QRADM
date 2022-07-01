@@ -1,15 +1,14 @@
 es:
   activerecord:
     models:
-      event: Evento
+      activity: Actividad
     attributes:
-      event:
+      activity:
         name: Nombre
         description: Descripción
         content: Contenido
         code: Código
         amount: monto
-        type_validation: Tipo de Validación
         init_date: Fecha inicio
         init_fin: Fecha fin
-        is_close: Esta finalizado?
+        event: Evento

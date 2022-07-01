@@ -1,47 +1,68 @@
-<%= form_with(model: user) do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<div class="card-block">
+    <section class="example">
+    <%= form_with(model: user) do |form| %>
+      <% if user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    
+          <ul>
+            <% user.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="panel">
+                        <div class="panel-body">
+                          <div class="form-group">
+                          <%= form.label :name, class: 'negrita' %>
+                          <%= form.text_field :name, class: 'form-control'  %>
+                          </div>
 
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+                        
+                    
+                          <div class="field">
+                          <%= form.label :last_name, class: 'negrita' %>
+                          <%= form.text_field :last_name, class: 'form-control' %>
+                        </div>
+                      
+                        <div class="field">
+                          <%= form.label :type_role, class: 'negrita' %>
+                          <%= form.text_field :type_role, class: 'form-control' %>
+                        </div>
+                      
+                        <div class="field">
+                          <%= form.label :phone, class: 'negrita' %>
+                          <%= form.text_field :phone, class: 'form-control' %>
+                        </div>
+                      
+                        <div class="field">
+                          <%= form.label :state %>
+                          <%= form.check_box :state %>
+                        </div>
+                      
+                        <div class="field">
+                          <%= form.label :event_id, class: 'negrita' %>
+                          <%= form.text_field :event_id, class: 'form-control' %>
+                        </div>
+                      
+                        <div class="actions">
+                          <%= form.submit %>
+                        </div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+                  
+                            <br />
+                            <br />
+                        </div>
+                    </section>
+                </div>
+            </div>
+      <% end %>
+    </section>
+</div>
 
-  <div class="field">
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
-  </div>
 
-  <div class="field">
-    <%= form.label :type_role %>
-    <%= form.text_field :type_role %>
-  </div>
 
-  <div class="field">
-    <%= form.label :phone %>
-    <%= form.text_field :phone %>
-  </div>
-
-  <div class="field">
-    <%= form.label :state %>
-    <%= form.check_box :state %>
-  </div>
-
-  <div class="field">
-    <%= form.label :event_id %>
-    <%= form.text_field :event_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+  
