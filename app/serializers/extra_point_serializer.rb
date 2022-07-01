@@ -4,6 +4,8 @@ class ExtraPointSerializer < ActiveModel::Serializer
 
     def my_extrapoint
         code = @instance_options[:code]
-        GroupExtraPoint.includes(:group).where("groups.code = '#{code}' and group_id = groups.id and extra_point_id = #{object.id}").references(:group).first
+        GroupExtraPoint.select("group_extra_points.id, group_extra_points.amount, group_extra_points.group_id, group_extra_points.extra_point_id, group_extra_points.observation, group_extra_points.user_id, users.name")
+                       .includes(:group, :user)
+                       .where("users.id = group_extra_points.user_id and groups.code = '#{code}' and group_id = groups.id and extra_point_id = #{object.id}").references(:group).first
     end
 end

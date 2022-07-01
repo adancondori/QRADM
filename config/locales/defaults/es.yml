@@ -289,10 +289,10 @@ es:
     add: Agregar
     destroy: Eliminar
   button_helper:
-    view_group: Ver Familias
-  name_group: Familias
-  point_activity: Puntos Actividades
-  point_sanction: Puntos Sanciones
+    view_group: Ver CLUBES
+  name_group: Clubes
+  point_activity: Puntos
+  point_sanction: Sanciones
   point_extra: Puntos Extras
   total: Totales
     

@@ -5,18 +5,31 @@ class Group < ApplicationRecord
   has_many :group_extra_points
   protokoll :code, :pattern => "GROUP%y%m#####"
 
-  def sum_group_activities
-    group_activities.where("group_id <= ?", self.id).sum(:amount)
+  def sum_group_activities(from_app=false)
+    if from_app
+      group_activities.includes(:activity).where("activities.is_visible = true and group_id <= ?", self.id).sum(:amount)
+    else
+      group_activities.where("group_id <= ?", self.id).sum(:amount)
+    end
   end
-  def sum_group_sanctions
-    group_sanctions.where("group_id <= ?", self.id).sum(:amount)
+  def sum_group_sanctions(from_app=false)
+    if from_app
+      group_sanctions.where("group_id <= ?", self.id).sum(:amount)
+    else
+      group_sanctions.where("group_id <= ?", self.id).sum(:amount)
+    end
   end
-  def sum_group_extra_points
-    group_extra_points.where("group_id <= ?", self.id).sum(:amount)
+  def sum_group_extra_points(from_app=false)
+    if from_app
+      group_extra_points.where("group_id <= ?", self.id).sum(:amount)
+    else
+      group_extra_points.where("group_id <= ?", self.id).sum(:amount)
+    end
+
   end
 
-  def sum_total
-    sum_group_activities - sum_group_sanctions + sum_group_extra_points
+  def sum_total(from_app=false)
+    sum_group_activities(from_app) - sum_group_sanctions(from_app) + sum_group_extra_points(from_app)
   end
 
   def generate_qr
