@@ -24,13 +24,19 @@ class API::V1::Mobile::SanctionController < API::V1::Mobile::ApplicationControll
     value = params[:value]
     observation = params[:observation]
     user = current_user
+    existModel = GroupSanction.where("group_id = #{group.id} and sanction_id = #{sanction.id}").first
     group_sanction = GroupSanction.new(amount: value, 
                                       group_id: group.id,
                                       sanction_id: sanction.id,
                                       observation: observation,
                                       user_id: user.id
                                     )
-    if (group_sanction.save!)
+    if existModel.present?
+      render json: {
+        type: RESPONSE_BAD,
+        msg: 'La informacion ya existe en el Sistema, contactese con su Administrador.'
+      }
+    elsif (group_sanction.save!)
       render json: {
         type: RESPONSE_SUCCESSFULLY
       }

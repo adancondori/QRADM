@@ -24,13 +24,18 @@ class API::V1::Mobile::ActivityController < API::V1::Mobile::ApplicationControll
     value = params[:value]
     observation = params[:observation]
     user = current_user
+    existModel = GroupActivity.where("group_id = #{group.id} and activity_id = #{activity.id}").first
     group_activity = GroupActivity.new(amount: value, 
                                       group_id: group.id,
                                       activity_id: activity.id,
                                       observation: observation,
-                                      user_id: user.id
-                                    )
-    if (group_activity.save!)
+                                      user_id: user.id)
+    if existModel.present?
+      render json: {
+        type: RESPONSE_BAD,
+        msg: 'La informacion ya existe en el Sistema, contactese con su Administrador.'
+      }
+    elsif (group_activity.save!)
       render json: {
         type: RESPONSE_SUCCESSFULLY
       }
