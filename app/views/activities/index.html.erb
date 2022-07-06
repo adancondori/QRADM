@@ -35,7 +35,7 @@
             <% @activities.each do |activity| %>
             <tr>
                 <td><%= activity.name %></td>
-                <td><%= activity.description %></td>
+                <td><%= activity.description[0..100].gsub(/\s\w+\s*$/,'...') %></td>
                 <td><%= activity.rules %></td>
                 <td><%= activity.code %></td>
                 <td><%= activity.date_init %></td>

@@ -22,6 +22,7 @@
             <th><%= t('point_sanction')%></th>
             <th><%= t('point_extra')%></th>
             <th><%= t('total')%></th>
+            <th><%= t('Categoria')%></th>
             <th> Acciones</th>
           </tr>
           </thead>
@@ -33,6 +34,7 @@
               <td class="v-align-middle"><%= group.sum_group_sanctions * -1%></td>
               <td class="v-align-middle"><%= group.sum_group_extra_points %></td>
               <td class="v-align-middle"><%= group.sum_total %></td>
+              <td class="v-align-middle"><%= group.get_category %></td>
               <td class="v-align-middle">
                 <%= link_to t("button_action.view"), group, class: "btn btn-success" %>
                 <%= link_to t("button_action.edit"), edit_group_path(group), class: "btn btn-primary" %>

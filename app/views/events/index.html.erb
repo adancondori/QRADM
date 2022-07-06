@@ -32,7 +32,7 @@
                         <% @events.each do |event| %>
                           <tr>
                             <td class="v-align-middle"><%= event.name %></td>
-                            <td class="v-align-middle"><%= event.description %></td>
+                            <td class="v-align-middle"><%= event.description[0..100].gsub(/\s\w+\s*$/,'...') %></td>
                             <td class="v-align-middle"><%= event.code %></td>
                             <td class="v-align-middle"><%= event.amount %></td>
                             <td class="v-align-middle"><%= event.type_validation %></td>

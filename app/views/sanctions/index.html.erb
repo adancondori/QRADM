@@ -30,7 +30,7 @@
           <tr>
             <td><%= sanction.amount %></td>
             <td><%= sanction.name %></td>
-            <td><%= sanction.description %></td>
+            <td><%= sanction.description[0..100].gsub(/\s\w+\s*$/,'...') %></td>
             <td><%= sanction.event_id %></td>
             <td><%= sanction.user_id %></td>
             <td><%= link_to 'Show', sanction, class: "btn btn-dark"%></td>

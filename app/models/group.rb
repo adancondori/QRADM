@@ -32,6 +32,23 @@ class Group < ApplicationRecord
     sum_group_activities(from_app) - sum_group_sanctions(from_app) + sum_group_extra_points(from_app)
   end
 
+  def get_category
+    categories = [{:name => "Categoria ORO",:point => 16000},
+                  {:name => "Categoria BRONCE",:point => 4000},
+                  {:name =>"Categoria PLATA",:point => 2000},
+                  {:name => "Categoria MADERA",:point => 1000}
+    ]
+    #result = categories.shift
+    result = {name: "Categoria no encontrada",point: 0}
+    total = self.sum_total
+    categories.each_with_index do |item, index|
+      if (item[:point] >= total)
+        result = categories[index]
+      end
+    end
+    result[:name]
+  end
+
   def generate_qr
     qrcode = RQRCode::QRCode.new(self.code)
 
