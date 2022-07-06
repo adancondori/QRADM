@@ -24,9 +24,15 @@ Rails.application.routes.draw do
   devise_for :users , controllers: {
     registrations: 'users/registrations',
   }
+  # as :user do
+  #   get "/register", to: "registrations#new", as: "register"
+  # end
+
+
   devise_scope :user do
-    #get '/users/sign_out' => 'sessions#destroy'
     get '/users/sign_out' => 'devise/sessions#destroy'
+    post 'register' => 'users#register'
+    get 'new_user' => 'users#new_user'
   end
 
   #, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }

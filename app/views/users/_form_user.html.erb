@@ -1,0 +1,73 @@
+<div class="card-block">
+  <section class="example">
+    <%= form_with model: user,url: "/register", method: :post do |f| %>
+      <% if user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+          <ul>
+            <% user.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </div>
+
+      <div class="field">
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name %>
+      </div>
+
+      <div class="field">
+        <%= f.label :type_role %>
+        <%= f.select :type_role, options_for_select([['ADMINISTRADOR','ADMINISTRADOR'],['GUARDIA','GUARDIA'],['INVITADO','INVITADO']], :selected => params[:type_role]), {}, { :class => 'span3 controls controls-row' } %>
+      </div>
+
+      <div class="field">
+        <%= f.label :phone %>
+        <%= f.text_field :phone %>
+      </div>
+
+      <div class="field">
+        <%= f.label :state %>
+        <%= f.check_box :state %>
+      </div>
+
+      <div class="field">
+        <%= f.label :event_id %>
+        <%= f.select :event_id, options_from_collection_for_select(Event.all, 'id', 'name', '1') %>
+      </div>
+
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      </div>
+
+        <div class="actions">
+          <%= f.submit %>
+        </div>
+      <% end %>
+  </section>
+</div>
+
+
+
+  
