@@ -1,24 +1,51 @@
-<p id="notice"><%= notice %></p>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Show Extra Point</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Show Extra Point</li>
+      </ol>
+    </nav>
+</div>
+<div class="card-block">
+    <section class="text-center">
+        <div class="container">
+            <h3 class="jumbotron-heading"><%= @extra_point.name %></h3>
+        </div>
+    </section>
 
-<p>
-  <strong>Amount:</strong>
-  <%= @extra_point.amount %>
-</p>
+    <div class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" align="left">
 
-<p>
-  <strong>Name:</strong>
-  <%= @extra_point.name %>
-</p>
+                <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @extra_point.description %>
-</p>
+                <p>
+                  <strong>Amount:</strong>
+                  <%= @extra_point.amount %>
+                </p>
+                
+                <p>
+                  <strong>Name:</strong>
+                  <%= @extra_point.name %>
+                </p>
+                
+                <p>
+                  <strong>Description:</strong>
+                  <%= @extra_point.description %>
+                </p>
+                
+                <p>
+                  <strong>Event:</strong>
+                  <%= @extra_point.event.name %>
+                </p>
+              <%= link_to t("button_action.edit"), edit_extra_point_path(@extra_point), class: "btn btn-dark" %> |
+              <%= link_to t("button_action.back"), extra_points_path, class: "btn btn-primary" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<p>
-  <strong>Event:</strong>
-  <%= @extra_point.event.name %>
-</p>
 
-<%= link_to 'Edit', edit_extra_point_path(@extra_point) %> |
-<%= link_to 'Back', extra_points_path %>

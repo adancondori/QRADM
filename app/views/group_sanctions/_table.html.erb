@@ -1,30 +1,45 @@
+<div class="card-block">
+    <div align="left">
+      <%= link_to 'New Group Sanctions', new_group_sanction_path, class: "btn btn-success mt-4 ml-3" %>
+    </div>
+  <section class="example mt-4">
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Amount</th>
+              <th>Date done</th>
+              <th>Group</th>
+              <th>Sanction</th>
+              <th>User</th>
+              <th>Observacion</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% group_sanctions.each do |group_sanction| %>
+            <tr>
+                <td><%= group_sanction.amount %></td>
+                <td><%= group_sanction.date_done %></td>
+                <td><%= group_sanction.group.name %></td>
+                <td><%= group_sanction.sanction.name %></td>
+                <td><%= group_sanction.user.full_name %></td>
+                <td><%= group_sanction.observation %></td>
+                <td class="v-align-middle">
+                  <%= link_to t("button_action.view"), group_sanction, class: "btn btn-dark" %>
+                  <%= link_to t("button_action.edit"), edit_group_sanction_path(group_sanction), class: "btn btn-primary" %>
+                  <%= link_to t("button_action.destroy"), group_sanction, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+                </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <br>
+      </div>
+    </div>
+  </section>
+</div>
 
-<table>
-  <thead>
-  <tr>
-    <th>Amount</th>
-    <th>Date done</th>
-    <th>Group</th>
-    <th>Sanction</th>
-    <th>User</th>
-    <th>Observacion</th>
-    <th colspan="3"></th>
-  </tr>
-  </thead>
 
-  <tbody>
-  <% group_sanctions.each do |group_sanction| %>
-    <tr>
-      <td><%= group_sanction.amount %></td>
-      <td><%= group_sanction.date_done %></td>
-      <td><%= group_sanction.group.name %></td>
-      <td><%= group_sanction.sanction.name %></td>
-      <td><%= group_sanction.user.full_name %></td>
-      <td><%= group_sanction.observation %></td>
-      <td><%= link_to 'Show', group_sanction %></td>
-      <td><%= link_to 'Edit', edit_group_sanction_path(group_sanction) %></td>
-      <td><%= link_to 'Destroy', group_sanction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+

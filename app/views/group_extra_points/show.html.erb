@@ -1,29 +1,55 @@
-<p id="notice"><%= notice %></p>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Show Group Extra Point</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Show Group Extra Point</li>
+      </ol>
+    </nav>
+</div>
+<div class="card-block">
+    <section class="text-center">
+        <div class="container">
+            <h3 class="jumbotron-heading"><%= @group_extra_point.group.name %></h3>
+        </div>
+    </section>
 
-<p>
-  <strong>Amount:</strong>
-  <%= @group_extra_point.amount %>
-</p>
+    <div class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" align="left">
+                <p>
+                <strong>Amount:</strong>
+                <%= @group_extra_point.amount %>
+              </p>
+              
+              <p>
+                <strong>Date done:</strong>
+                <%= @group_extra_point.date_done %>
+              </p>
+              
+              <p>
+                <strong>Group:</strong>
+                <%= @group_extra_point.group.name %>
+              </p>
+              
+              <p>
+                <strong>Extra point:</strong>
+                <%= @group_extra_point.extra_point.name %>
+              </p>
+              <p>
+                <strong>User:</strong>
+                <%= @group_extra_point.user.full_name %>
+              </p>
+              <%= link_to t("button_action.edit"), edit_group_extra_point_path(@group_extra_point), class: "btn btn-dark" %> |
+              <%= link_to t("button_action.back"), group_extra_points_path, class: "btn btn-primary" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<p>
-  <strong>Date done:</strong>
-  <%= @group_extra_point.date_done %>
-</p>
 
-<p>
-  <strong>Group:</strong>
-  <%= @group_extra_point.group.name %>
-</p>
 
-<p>
-  <strong>Extra point:</strong>
-  <%= @group_extra_point.extra_point.name %>
-</p>
-<p>
-  <strong>User:</strong>
-  <%= @group_extra_point.user.full_name %>
-</p>
 
-<%= link_to 'Edit', edit_group_extra_point_path(@group_extra_point), class: "btn btn-dark" %> |
-<%= link_to 'Back', group_extra_points_path, class: "btn btn-primary" %>
 

@@ -1,8 +1,15 @@
-<p id="notice"><%= notice %></p>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Group Activities</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Group Activities</li>
+      </ol>
+    </nav>
+</div>
 
-<h1>Group Activities</h1>
 <%= render 'table', group_activities: @group_activities %>
 
 <br>
 
-<%= link_to 'New Group Activity', new_group_activity_path %>
+

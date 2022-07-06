@@ -3,13 +3,13 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="index">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Activity</li>
+      <li class="breadcrumb-item active" aria-current="page">Sanction</li>
     </ol>
   </nav>
 </div>
 <div class="card-block">
     <div align="left">
-      <%= link_to t("button_action.add"), new_activity_path, class: "btn btn-success mt-4 ml-3" %>
+      <%= link_to 'New Sanction', new_sanction_path, class: "btn btn-success mt-4 ml-3" %>
     </div>
   <section class="example mt-4">
     <div class="panel-body">
@@ -41,8 +41,6 @@
       </tbody>
         </table>
         <br>
-        <%= link_to 'New Sanction', new_sanction_path %>
-
       </div>
     </div>
   </section>

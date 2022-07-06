@@ -1,37 +1,52 @@
-<%= form_with(model: extra_point) do |form| %>
-  <% if extra_point.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(extra_point.errors.count, "error") %> prohibited this extra_point from being saved:</h2>
+<div class="card-block">
+    <section class="example">
+    <%= form_with(model: extra_point) do |form| %>
+      <% if extra_point.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(extra_point.errors.count, "error") %> prohibited this extra_point from being saved:</h2>
+    
+          <ul>
+            <% extra_point.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="panel">
+                        <div class="panel-body">
+                          <div class="field">
+                            <%= form.label :amount, class: 'negrita'  %>
+                            <%= form.text_field :amount, class: 'form-control'  %>
+                          </div>
+                      
+                          <div class="field">
+                            <%= form.label :name, class: 'negrita'  %>
+                            <%= form.text_field :name, class: 'form-control'  %>
+                          </div>
+                        
+                          <div class="field">
+                            <%= form.label :description, class: 'negrita'  %>
+                            <%= form.text_area :description, class: 'form-control'  %>
+                          </div>
+                        
+                          <div class="field">
+                            <%= form.label :event_id %>
+                            <%= form.select :event_id, options_from_collection_for_select(Event.all, 'id', 'name', '1') %>
+                          </div>
 
-      <ul>
-        <% extra_point.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+                          <div class="actions">
+                            <%= form.submit %>
+                          </div>
+                  
+                            <br />
+                            <br />
+                        </div>
+                    </section>
+                </div>
+            </div>
+      <% end %>
+    </section>
+</div>
 
-  <div class="field">
-    <%= form.label :amount %>
-    <%= form.text_field :amount %>
-  </div>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :event_id %>
-    <%= form.select :event_id, options_from_collection_for_select(Event.all, 'id', 'name', '1') %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
