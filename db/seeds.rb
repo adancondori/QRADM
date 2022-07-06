@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 count = User.all.count
 puts "ENTRO SEEDS" 
-if count != 0 
+if count == 0 
     puts "CREADO EXITOSAMENTE ADMIN" 
     user = User.new
     user.name = "admin"
