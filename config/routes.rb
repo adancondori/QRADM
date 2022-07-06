@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   resources :sanctions
   # resources :users
   resources :group_activities
-  resources :activities
+  resources :activities do
+    member do
+      post 'assign_all'
+    end
+  end
   resources :people
   resources :groups do
     collection { post :import }

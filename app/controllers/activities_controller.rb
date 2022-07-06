@@ -19,6 +19,17 @@ class ActivitiesController < ApplicationController
   def edit
   end
 
+  def assign_all
+    activities = Activity.all
+    if params[:activity_id]
+      if @activity.save
+        # format.html { redirect_to activity_url(@activity), notice: "Activity was successfully created." }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # POST /activities or /activities.json
   def create
     @activity = Activity.new(activity_params)
