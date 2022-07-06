@@ -68,7 +68,7 @@
   
   <div class="field">
     <%= form.label :type_role %>
-    <%= form.select :type_role, options_for_select(User.TYPES_ROLE, :selected => params[:type_role]), {}, { :class => 'span3 controls controls-row' } %>
+    <%= form.select :type_role, options_for_select(User::TYPES_ROLE, :selected => params[:type_role]), {}, { :class => 'span3 controls controls-row' } %>
   </div>
 
   <div class="field">
