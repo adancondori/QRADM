@@ -3,11 +3,14 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Postres</li>
+          <li class="breadcrumb-item active" aria-current="page">Campamentos</li>
       </ol>
     </nav>
 </div>
 
 <%= render 'form', event: @event %>
 
-<%= link_to t("button_action.back"), events_path %>
+<%= link_to t("button_action.back"), events_path, class: "btn btn-primary" %>
+
+
+

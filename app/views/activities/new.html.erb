@@ -1,5 +1,16 @@
-<h1>New Activity</h1>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">New Activity</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">New Activity</li>
+      </ol>
+    </nav>
+</div>
+
 
 <%= render 'form', activity: @activity %>
 
-<%= link_to 'Back', activities_path %>
+
+<%= link_to 'Back', activities_path, class: "btn btn-primary" %>
+

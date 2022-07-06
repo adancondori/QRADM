@@ -1,29 +1,45 @@
-<table>
-  <thead>
-  <tr>
-    <th>Amount</th>
-    <th>Date done</th>
-    <th>Group</th>
-    <th>Activity</th>
-    <th>Observation</th>
-    <th>User</th>
-    <th colspan="3"></th>
-  </tr>
-  </thead>
+<div class="card-block">
+    <div align="left">
+      <%= link_to 'New Group Activity', new_group_activity_path, class: "btn btn-success mt-4 ml-3" %>
+    </div>
+  <section class="example mt-4">
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Amount</th>
+              <th>Date done</th>
+              <th>Group</th>
+              <th>Activity</th>
+              <th>Observation</th>
+              <th>User</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+          <% group_activities.each do |group_activity| %>
+            <tr>
+              <td><%= group_activity.amount %></td>
+              <td><%= group_activity.date_done %></td>
+              <td><%= group_activity.group.name %></td>
+              <td><%= group_activity.activity.name %></td>
+              <td><%= group_activity.observation %></td>
+              <td><%= group_activity.user.full_name %></td>
+                <td class="v-align-middle">
+                  <%= link_to t("button_action.view"), group_activity, class: "btn btn-dark" %>
+                  <%= link_to t("button_action.edit"), edit_group_activity_path(group_activity), class: "btn btn-primary" %>
+                  <%= link_to t("button_action.destroy"), group_activity, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+                </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <br>
+      </div>
+    </div>
+  </section>
+</div>
 
-  <tbody>
-  <% group_activities.each do |group_activity| %>
-    <tr>
-      <td><%= group_activity.amount %></td>
-      <td><%= group_activity.date_done %></td>
-      <td><%= group_activity.group.name %></td>
-      <td><%= group_activity.activity.name %></td>
-      <td><%= group_activity.observation %></td>
-      <td><%= group_activity.user.full_name %></td>
-      <td><%= link_to 'Show', group_activity %></td>
-      <td><%= link_to 'Edit', edit_group_activity_path(group_activity) %></td>
-      <td><%= link_to 'Destroy', group_activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+
+

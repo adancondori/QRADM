@@ -1,39 +1,68 @@
-<p id="notice"><%= notice %></p>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Show People</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Show People</li>
+      </ol>
+    </nav>
+</div>
+<div class="card-block">
+    <section class="text-center">
+        <div class="container">
+            <h3 class="jumbotron-heading"><%= @person.name %></h3>
+        </div>
+    </section>
 
-<p>
-  <strong>Name:</strong>
-  <%= @person.name %>
-</p>
+    <div class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" align="left">
 
-<p>
-  <strong>Last name:</strong>
-  <%= @person.last_name %>
-</p>
+                <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @person.phone %>
-</p>
+                <p>
+                  <strong>Name:</strong>
+                  <%= @person.name %>
+                </p>
+                
+                <p>
+                  <strong>Last name:</strong>
+                  <%= @person.last_name %>
+                </p>
+                
+                <p>
+                  <strong>Phone:</strong>
+                  <%= @person.phone %>
+                </p>
+                
+                <p>
+                  <strong>Code:</strong>
+                  <%= @person.code %>
+                </p>
+                
+                <p>
+                  <strong>State:</strong>
+                  <%= @person.state %>
+                </p>
+                
+                <p>
+                  <strong>Group:</strong>
+                  <%= @person.group_id %>
+                </p>
+                
+                <p>
+                  <strong>Event:</strong>
+                  <%= @person.event_id %>
+                </p>
 
-<p>
-  <strong>Code:</strong>
-  <%= @person.code %>
-</p>
+                  <%= link_to t("button_action.edit"), edit_person_path(@person), class: "btn btn-dark" %> |
+                  <%= link_to t("button_action.back"), people_path, class: "btn btn-primary" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<p>
-  <strong>State:</strong>
-  <%= @person.state %>
-</p>
 
-<p>
-  <strong>Group:</strong>
-  <%= @person.group_id %>
-</p>
 
-<p>
-  <strong>Event:</strong>
-  <%= @person.event_id %>
-</p>
-
-<%= link_to 'Edit', edit_person_path(@person) %> |
-<%= link_to 'Back', people_path %>

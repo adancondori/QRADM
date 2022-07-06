@@ -1,29 +1,59 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Show Sanction</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Show Sanction</li>
+      </ol>
+    </nav>
+</div>
+<div class="card-block">
+    <section class="text-center">
+        <div class="container">
+            <h3 class="jumbotron-heading"><%= @sanction.name %></h3>
+        </div>
+    </section>
+
+    <div class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" align="left">
+
+                <p id="notice"><%= notice %></p>
+
+                <p>
+                  <strong>Amount:</strong>
+                  <%= @sanction.amount %>
+                </p>
+                
+                <p>
+                  <strong>Name:</strong>
+                  <%= @sanction.name %>
+                </p>
+                
+                <p>
+                  <strong>Description:</strong>
+                  <%= @sanction.description %>
+                </p>
+                
+                <p>
+                  <strong>Event:</strong>
+                  <%= @sanction.event_id %>
+                </p>
+                
+                <p>
+                  <strong>User:</strong>
+                  <%= @sanction.user_id %>
+                </p>
+
+              <%= link_to t("button_action.edit"), edit_sanction_path(@sanction), class: "btn btn-dark" %> |
+              <%= link_to 'Back', sanctions_path, class: "btn btn-primary" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Amount:</strong>
-  <%= @sanction.amount %>
-</p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @sanction.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @sanction.description %>
-</p>
-
-<p>
-  <strong>Event:</strong>
-  <%= @sanction.event_id %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @sanction.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_sanction_path(@sanction) %> |
-<%= link_to 'Back', sanctions_path %>
