@@ -1,5 +1,5 @@
 class ActivitiesController < ApplicationController
-  before_action :set_activity, only: %i[ show edit update destroy ]
+  before_action :set_activity, only: %i[ show edit update destroy update_all]
 
   # GET /activities or /activities.json
   def index
@@ -20,12 +20,32 @@ class ActivitiesController < ApplicationController
   end
 
   def assign_all
-    activities = Activity.all
-    if params[:activity_id]
-      if @activity.save
-        # format.html { redirect_to activity_url(@activity), notice: "Activity was successfully created." }
-      else
-        format.html { render :new, status: :unprocessable_entity }
+    @activity = Activity.new
+    @activities = Activity.all
+  end
+
+  def update_all
+    @activity = Activity.new(activity_params)
+    # Gr
+    begin
+      ActiveRecord::Base.transaction do
+        byebug
+        Group.all.each do |group|
+          group_activity = GroupActivity.new
+          group_activity.amount = @activity.amount
+          group_activity.group_id = group.id
+          group_activity.activity_id = @activity.id
+          group_activity.observation = "Creado por SISTEMA"
+          group_activity.user_id = current_user.id
+          group_activity.save!
+        end
+        respond_to do |format|
+          format.html { redirect_to activities_path, notice: "Actividades fueron asignadas correctamente." }
+        end
+      end
+    rescue ActiveRecord::RecordInvalid
+      respond_to do |format|
+        format.html { redirect_to assign_all_activities_path, notice: "Error al crear Datos." }
       end
     end
   end

@@ -4,7 +4,7 @@ class GroupsController < ApplicationController
 
   # GET /groups or /groups.json
   def index
-    @groups = Group.all
+    @groups = Group.all.sort {|a,b| a.name <=> b.name}
     respond_to do |format|
       format.html
       format.csv { send_data @groups.to_csv(['name', 'code', 'description']) }

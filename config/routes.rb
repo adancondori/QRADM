@@ -9,9 +9,8 @@ Rails.application.routes.draw do
   # resources :users
   resources :group_activities
   resources :activities do
-    member do
-      post 'assign_all'
-    end
+    get 'assign_all', on: :collection
+    post 'update_all', on: :member
   end
   resources :people
   resources :groups do
