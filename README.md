@@ -27,3 +27,17 @@ Step to deploy
 /deployment/docker/compose/deployment/deploy.sh s100
 
 * ...
+
+### Pasos de instalacion por primera vez
+docker-compose build
+docker-compose up
+// Abrir otra terminal y ejecutar ejecutar 
+docker-compose exec web bash
+rails db:create
+rails db:migrate
+rails db:seed
+
+
+// De aqui en en adelante solo debe ejecutar
+docker-compose up
+// para salir es ctrl + C
